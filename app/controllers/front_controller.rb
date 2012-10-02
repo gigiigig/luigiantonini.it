@@ -1,5 +1,5 @@
 class FrontController < ApplicationController
   def index
-   @technology = Technology.first
+    @technology = Technology.first
   end
 end
