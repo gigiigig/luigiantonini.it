@@ -4,7 +4,7 @@ ActiveAdmin.register Technology do
 
     form do |f|
       
-      f.inputs "Content" do
+      f.inputs  do
         f.input :name
         f.input :description
         f.input :type , :as => :select , :collection => ["Language" , "Framework" , "Platform"] 
