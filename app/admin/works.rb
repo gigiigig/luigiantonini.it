@@ -6,7 +6,7 @@ ActiveAdmin.register Work  do
   filter :date
 
   form :html => { :multipart => true } do |f|
-    
+
     f.inputs do
       f.input :name
       f.input :description
@@ -17,14 +17,14 @@ ActiveAdmin.register Work  do
 
     f.inputs "Product images" do
       f.has_many :pictures do |p|
-        p.input :pictures, :as => :file, 
-                :label => "Image",:hint => !p.object.image.exists? ? p.template.content_tag(:span, "No Image Yet") : p.template.image_tag(p.object.image.url(:thumb))
-        #p.input :_destroy, :as=>:boolean, :required => false, :label => 'Remove image'
+        p.input :pictures, :as => :file,
+        :label => "Image",:hint => !p.object.image.exists? ? p.template.content_tag(:span, "No Image Yet") : p.template.image_tag(p.object.image.url(:thumb))
+      #p.input :_destroy, :as=>:boolean, :required => false, :label => 'Remove image'
       end
     end
-    
+
     f.buttons
-    
+
   end
 
   index do
@@ -34,13 +34,26 @@ ActiveAdmin.register Work  do
     column :date
 
     column "Cover" do |work|
-      image_tag work.cover.url(:thumb)
+      if(work.cover.exists?) then image_tag work.cover.url(:thumb) end
+    end
+
+    column "Images" do |work|
+      work.pictures.size
     end
 
     default_actions
 
   end
-
+  
+  show do
+    attributes_table do
+      row :name
+      row :description
+      row :cover do |work|
+        if(work.cover.exists?) then image_tag work.cover.url(:thumb) end
+      end
+    end
+  end
 end
 
 # ActiveAdmin.register_page "Works Categories" do
