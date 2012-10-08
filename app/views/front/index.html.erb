@@ -1,11 +1,18 @@
 <h1>Front#index</h1>
 <p>Find me in app/views/front/index.html.erb</p>
 
- <%= semantic_form_for @technology do |f| %>
-   <%= f.inputs %>
+ <%= semantic_form_for @work do |f| %>
+   <%=f.inputs do %> 
+   <%=f.input :name %>
+   <%=f.input :description %>
+   <%=f.input :date %>
+   <%=f.input :cover, :as => :file%> 
+   <%=f.input :delete_cover , :as => :boolean %>
+     <%= f.inputs :for => :pictures do |p|%>
+        <%= p.input :pictures, :as => :file, 
+                :label => "Image",:hint => !p.object.image.exists? ? p.template.content_tag(:span, "No Image Yet") : p.template.image_tag(p.object.image.url(:thumb))%>
+     <% end %>
+   <% end %>
    <%= f.actions %>
  <% end %>
  
- <div>
-   <%= @work.cover.url %>
- </div>

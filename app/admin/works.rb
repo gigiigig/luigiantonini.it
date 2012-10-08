@@ -5,8 +5,8 @@ ActiveAdmin.register Work  do
   filter :description
   filter :date
 
-  form :html => { :enctype => "multipart/form-data" } do |f|
-
+  form :html => { :multipart => true } do |f|
+    
     f.inputs do
       f.input :name
       f.input :description
@@ -14,9 +14,17 @@ ActiveAdmin.register Work  do
       f.input :cover, :as => :file, :hint => if(f.object.cover.exists?) then f.template.image_tag(f.object.cover.url(:thumb)) end
       f.input :delete_cover , :as => :boolean
     end
-    
 
+    f.inputs "Product images" do
+      f.has_many :pictures do |p|
+        p.input :pictures, :as => :file, 
+                :label => "Image",:hint => !p.object.image.exists? ? p.template.content_tag(:span, "No Image Yet") : p.template.image_tag(p.object.image.url(:thumb))
+        #p.input :_destroy, :as=>:boolean, :required => false, :label => 'Remove image'
+      end
+    end
+    
     f.buttons
+    
   end
 
   index do
@@ -30,7 +38,7 @@ ActiveAdmin.register Work  do
     end
 
     default_actions
-    
+
   end
 
 end
