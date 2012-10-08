@@ -17,7 +17,7 @@ ActiveAdmin.register Work  do
 
     f.inputs "Product images" do
       f.has_many :pictures do |p|
-        p.input :pictures, :as => :file,
+        p.input :image, :as => :file,
         :label => "Image",:hint => !p.object.image.exists? ? p.template.content_tag(:span, "No Image Yet") : p.template.image_tag(p.object.image.url(:thumb))
       #p.input :_destroy, :as=>:boolean, :required => false, :label => 'Remove image'
       end
@@ -51,6 +51,13 @@ ActiveAdmin.register Work  do
       row :description
       row :cover do |work|
         if(work.cover.exists?) then image_tag work.cover.url(:thumb) end
+      end
+      row :pictures do |work|
+        work.pictures.each do |picture|
+          div do
+            image_tag picture.image.url(:thumb)
+          end
+        end
       end
     end
   end
