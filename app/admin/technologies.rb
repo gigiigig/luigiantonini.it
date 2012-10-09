@@ -21,12 +21,12 @@ ActiveAdmin.register Technology do
 
   index :as => :grid do |t|
 
-    html = div do
-      link_to(h3 t.name , admin_technology_path(t))
-      span image_tag(t.image.url ,  :style => "height: 100px")
+    link_to admin_technology_path(t) do 
+      content_tag(:h3 , t.name) +
+      image_tag(t.image.url ,  :style => "height: 100px")
     end
 
-    link_to(html, admin_technology_path(t))
+    #link_to(html, admin_technology_path(t))
     
   end
 
