@@ -1,18 +1,24 @@
-<h1>Front#index</h1>
-<p>Find me in app/views/front/index.html.erb</p>
+<div class="row">
 
- <%= semantic_form_for @work do |f| %>
-   <%=f.inputs do %> 
-   <%=f.input :name %>
-   <%=f.input :description %>
-   <%=f.input :date %>
-   <%=f.input :cover, :as => :file%> 
-   <%=f.input :delete_cover , :as => :boolean %>
-     <%= f.inputs :for => :pictures do |p|%>
-        <%= p.input :image, :as => :file, 
-                :label => "Image",:hint => !p.object.image.exists? ? p.template.content_tag(:span, "No Image Yet") : p.template.image_tag(p.object.image.url(:thumb))%>
-     <% end %>
-   <% end %>
-   <%= f.actions %>
- <% end %>
- 
+  <div class="span12" id="home_message">
+    <%= image_tag "home_message_shadow_top.png" , :id => "home_message_shadow_top" %>
+    <%= image_tag "home_message_shadow_bottom.png" , :id => "home_message_shadow_bottom" %>
+    <p class="header">
+      Modern Language
+    </p>
+    <p class="text">
+      New Generation Language
+    </p>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="span3">
+    <% @technologies.each do |t| %>
+    <h2> <%= t.name %></h2>
+    <%= image_tag t.image.url %>
+    <% end %>
+  </div>
+
+</div>

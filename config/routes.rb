@@ -68,7 +68,8 @@ LuigiantoniniIt::Application.routes.draw do
   
   get "front/index"
   root :to => 'front#index'
-
+  
+  match ":action" => "front"
   
   
 end
