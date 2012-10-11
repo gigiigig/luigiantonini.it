@@ -26,7 +26,7 @@ ActiveAdmin.register Work  do
 
   end
 
-  index do
+  index :download_links => false do 
 
     column :name
     column :description

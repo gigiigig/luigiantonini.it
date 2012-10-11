@@ -2,8 +2,9 @@ class Technology < ActiveRecord::Base
   
   #change inheritance type for use type as column
   self.inheritance_column = :inheritance_type
-  attr_accessible :description, :name , :type , :delete_image
+  attr_accessible :description, :name , :type , :delete_image , :image
   attr_accessor :delete_image
+  
   
   validates :description , :name , :presence => true
   
