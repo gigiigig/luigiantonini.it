@@ -16,9 +16,13 @@
 
   <div class="span3">
     <% @technologies.each do |t| %>
-    <h2> <%= t.name %></h2>
-    <%= image_tag t.image.url %>
-    <% end %>
+    <div class="technology">
+      <%= image_tag t.image.url %>
+      <p>
+        <%= t.description %>
+      </p>
+      <% end %>
+    </div>
   </div>
 
 </div>

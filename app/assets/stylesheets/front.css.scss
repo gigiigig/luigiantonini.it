@@ -6,21 +6,39 @@
   
   overflow: hidden;
   margin-top: 20px;
+  position: relative;
+  height: 100px;
+  padding-top: 20px;
   
   #home_message_shadow_top {
-    position: relative;
+    position: absolute;
     top: -20px;
   }
   #home_message_shadow_bottom {
-    position: relative;
+    position: absolute;
     bottom: -20px;
   }
   
   p {
     position: relative;
     top: 10px;
+    font-family:"Times New Roman", Times, serif;
+    font-style: italic;
+    text-align: center;
+    
+    &.header {
+      font-size: 30px;
+    }
+    &.text{
+      font-size: 24px;  
+    }
+    
   }
   
+}
+
+.technology {
+  margin-top: 20px;
 }
 
 #curriculum {
