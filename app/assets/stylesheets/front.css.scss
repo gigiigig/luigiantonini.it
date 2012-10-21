@@ -9,6 +9,10 @@
   position: relative;
   height: 100px;
   padding-top: 20px;
+  border-top: 1px;
+  border-bottom: 1px;
+  border-style: solid;
+  border-color: #cdcdcd;
   
   #home_message_shadow_top {
     position: absolute;
@@ -23,20 +27,25 @@
     position: relative;
     top: 10px;
     font-family:"Times New Roman", Times, serif;
-    font-style: italic;
-    text-align: center;
     
     &.header {
       font-size: 30px;
+      font-style: italic;
+      padding-top: 15px;
+      //background-image: image-url("virgolette.png");
     }
     &.text{
-      font-size: 24px;  
+      font-size: 22px;
+      color: #999; 
     }
     
   }
   
 }
 
+.technologies{
+  margin-top: 20px;  
+}
 .technology {
   margin-top: 20px;
 }

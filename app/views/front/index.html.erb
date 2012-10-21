@@ -1,28 +1,29 @@
 <div class="row">
 
-  <div class="span12" id="home_message">
-    <%= image_tag "home_message_shadow_top.png" , :id => "home_message_shadow_top" %>
-    <%= image_tag "home_message_shadow_bottom.png" , :id => "home_message_shadow_bottom" %>
-    <p class="header">
-      Modern Language
-    </p>
-    <p class="text">
-      New Generation Language
-    </p>
+  <div class="span12" id="home_message" >
+    <div class="row">
+      <!-- <%= image_tag "home_message_shadow_top.png" , :id => "home_message_shadow_top" %>
+      <%= image_tag "home_message_shadow_bottom.png" , :id => "home_message_shadow_bottom" %> -->
+      <%= image_tag "virgolette.png" , :class => "span1" %>
+      <p class="header span11 ">
+        Modern Languagesses
+      </p>
+      <p class="text span11 offset1">
+        New Generation Language
+      </p>
+    </div>
   </div>
 </div>
 
-<div class="row">
-
-  <div class="span3">
-    <% @technologies.each do |t| %>
-    <div class="technology">
-      <%= image_tag t.image.url %>
-      <p>
-        <%= t.description %>
-      </p>
-      <% end %>
+<div class="row technologies">
+  <% @technologies.each do |t| %>
+    <div class="technology span4">
+      <div class="row">
+        <div class="span2" style="height: 80px;"><%= image_tag t.image.url , :class => "span2 offset1" %></div>
+        <p class="span4">
+          <%= t.description %>
+        </p>
+      </div>
     </div>
-  </div>
-
+  <% end %>
 </div>

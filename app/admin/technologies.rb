@@ -23,7 +23,7 @@ ActiveAdmin.register Technology do
 
     link_to admin_technology_path(t) do
       content_tag(:h3 , t.name) +
-      image_tag(t.image.url ,  :style => "height: 100px")
+      image_tag(t.image.url(:normal))
     end
 
   #link_to(html, admin_technology_path(t))
