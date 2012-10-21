@@ -52,6 +52,6 @@ gem 'meta_search',    '>= 1.1.0.pre'
 
 gem 'paperclip'
 
-gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", 
-                               :branch => "static" , :platform => :jruby
-#gem 'twitter-bootstrap-rails' , :platform => :ruby
+#gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", 
+#                               :branch => "static" , :platform => :jruby
+gem 'twitter-bootstrap-rails' , :platform => :ruby
