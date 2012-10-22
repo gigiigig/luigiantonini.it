@@ -6,6 +6,8 @@
 @import "compass/css3/appearance";
 @import "compass/css3/transition";
 
+$borders-color : #cdcdcd;
+
 #home_message {
   
   overflow: hidden;
@@ -18,7 +20,7 @@
   border-top: 1px;
   border-bottom: 1px;
   border-style: solid;
-  border-color: #cdcdcd;
+  border-color: $borders-color;
   
   #home_message_shadow_top {
     position: absolute;
@@ -65,8 +67,12 @@
   
   margin-top: 20px;
   
+  p.description {
+    height: 110px;
+  }
+  
   .technology_image {
-    height: 80px; 
+    height: 100px; 
     background-repeat: no-repeat;
     background-position: center;
     
@@ -79,3 +85,14 @@
   #header {display: none;}
   
 }
+
+h2{
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 26px;
+  margin-top: 80px;
+  border-bottom: 1px solid $borders-color;
+}
+
+

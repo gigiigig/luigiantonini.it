@@ -8,7 +8,7 @@ class Technology < ActiveRecord::Base
   
   validates :description , :name , :presence => true
   
-  has_attached_file :image , :styles => { :normal => "140x140" } , :default_url => "/assets/missing.png"
+  has_attached_file :image , :styles => { :normal => "140x80" } , :default_url => "/assets/missing.png"
   
   before_validation do 
     if (delete_image == 1) then image.clear end

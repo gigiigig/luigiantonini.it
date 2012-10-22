@@ -1,6 +1,6 @@
 class FrontController < ApplicationController
   def index
-    @technologies = Technology.all
+    @technologies = Technology.all(:order => "rand()" , :limit => 3)
   end
 
   def curriculum

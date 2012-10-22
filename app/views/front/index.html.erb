@@ -19,11 +19,14 @@
   <% @technologies.each do |t| %>
     <div class="technology span4">
       <div class="row">
-        <div class="span2 offset1 technology_image" style="background-image: url(<%= t.image.url %>);"></div>
-        <p class="span4">
+        <div class="span2 offset1 technology_image" style="background-image: url(<%= t.image.url(:normal) %>);"></div>
+        <p class="span4 description">
           <%= t.description %>
         </p>
       </div>
     </div>
   <% end %>
 </div>
+
+<h2>Portfolio</h2>
+
