@@ -16,6 +16,7 @@ class FrontController < ApplicationController
     response = http.request(request)
    
     @curriculum = response.body
+    @curriculum = @curriculum.gsub(/<style.*?>[\s\S]*<\/style>/i, "")
 
   end
 

@@ -3,3 +3,7 @@
 
 en:
   hello: "Hello world"
+  home_messages:
+    head: Modern Languages
+    text: New Generation Language
+    

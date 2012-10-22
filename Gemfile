@@ -29,6 +29,8 @@ group :assets do
   gem 'therubyrhino', :platform => :jruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'compass-rails'
+
 end
 
 gem 'jquery-rails'
@@ -55,3 +57,5 @@ gem 'paperclip'
 #gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", 
 #                               :branch => "static" , :platform => :jruby
 gem 'twitter-bootstrap-rails' , :platform => :ruby
+gem 'fancybox-rails', :git => 'https://github.com/sverigemeny/fancybox-rails'
+ 

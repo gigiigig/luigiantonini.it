@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "compass/css3";
+@import "compass/css3/appearance";
+@import "compass/css3/transition";
+
 #home_message {
   
   overflow: hidden;
@@ -9,6 +13,8 @@
   position: relative;
   height: 100px;
   padding-top: 20px;
+  border-left: 0px;
+  border-right: 0px;
   border-top: 1px;
   border-bottom: 1px;
   border-style: solid;
@@ -44,10 +50,28 @@
 }
 
 .technologies{
-  margin-top: 20px;  
+  margin-top: 20px;
+  
+  @include transition-property(all);
+  @include transition-duration(500ms); 
+  @include filter(grayscale(100%) brightness(0.1));
+      
+  &:hover {
+    @include filter(grayscale(0%) brightness(0.0));  
+  }
+    
 }
 .technology {
+  
   margin-top: 20px;
+  
+  .technology_image {
+    height: 80px; 
+    background-repeat: no-repeat;
+    background-position: center;
+    
+  }
+  
 }
 
 #curriculum {

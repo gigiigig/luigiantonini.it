@@ -48,7 +48,9 @@
           <div class="container nav-collapse">
             <ul class="nav pull-right">
               <li><%= link_to t(:home), "/"  %></li>
-              <li><%= link_to t(:curriculum), "/curriculum"  %></li>
+              <li><%= link_to t(:curriculum), "https://docs.google.com/document/pub?id=1b67GGHMnwoEVXUJ2d0E8ETrz-n9PVy9zCdTcnWZdJ2Y", 
+                                              'data-fancybox-type' => "iframe" , :class => 'fancybox' %>
+              </li>
               <li><%= link_to t(:portfolio), "/portfolio"  %></li>
               <li><%= link_to t(:contact), "/contact"  %></li>
             </ul>

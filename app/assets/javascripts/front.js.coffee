@@ -18,5 +18,7 @@ $(document).ready( ->
 
     top_bar.height(height)
   )
+  
+  $('a.fancybox').fancybox()
 
 )

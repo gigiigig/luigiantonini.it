@@ -6,10 +6,10 @@
       <%= image_tag "home_message_shadow_bottom.png" , :id => "home_message_shadow_bottom" %> -->
       <%= image_tag "virgolette.png" , :class => "span1" %>
       <p class="header span11 ">
-        Modern Languagesses
+        <%= t 'home_messages.head' %>
       </p>
       <p class="text span11 offset1">
-        New Generation Language
+        <%= t 'home_messages.text' %>
       </p>
     </div>
   </div>
@@ -19,7 +19,7 @@
   <% @technologies.each do |t| %>
     <div class="technology span4">
       <div class="row">
-        <div class="span2" style="height: 80px;"><%= image_tag t.image.url , :class => "span2 offset1" %></div>
+        <div class="span2 offset1 technology_image" style="background-image: url(<%= t.image.url %>);"></div>
         <p class="span4">
           <%= t.description %>
         </p>
