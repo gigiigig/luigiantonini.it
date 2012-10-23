@@ -48,36 +48,60 @@ $borders-color : #cdcdcd;
     }
     
   }
+    
+  &.fixed {
   
+    z-index: 1000;
+    position: fixed;
+    top: 10px;
+    background-image: image-url('background.png');
+    
+  }
+   
+}
+
+#portfolio {
+  &.fixed {
+  
+    z-index: 1000;
+    position: fixed;
+    top: 10px;
+    background-image: image-url('background.png');
+    
+  }
 }
 
 .technologies{
-  margin-top: 20px;
   
-  @include transition-property(all);
-  @include transition-duration(500ms); 
-  @include filter(grayscale(100%) brightness(0.1));
+  margin-top: 20px;
       
-  &:hover {
+  &:hover .technology .technology_image{
     @include filter(grayscale(0%) brightness(0.0));  
   }
+ 
+  .technology {
     
-}
-.technology {
-  
-  margin-top: 20px;
-  
-  p.description {
-    height: 110px;
+    margin-top: 20px;
+    
+    p.description {
+      height: 110px;
+    }
+    
+    .technology_image {
+      
+      @include transition-property(all);
+      @include transition-duration(500ms); 
+      @include filter(grayscale(100%) brightness(0.1));
+      
+      height: 100px; 
+      background-repeat: no-repeat;
+      background-position: center;
+      
+    }
+    
   }
   
-  .technology_image {
-    height: 100px; 
-    background-repeat: no-repeat;
-    background-position: center;
     
-  }
-  
 }
 
 #curriculum {
@@ -95,4 +119,17 @@ h2{
   border-bottom: 1px solid $borders-color;
 }
 
-
+.works {
+  
+  margin-top: 20px;
+  
+  .work{
+   
+    .work_image {
+      width: 100%;
+      height: 200px;
+    }
+    
+  }
+  
+}

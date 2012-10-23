@@ -58,4 +58,4 @@ gem 'paperclip'
 #                               :branch => "static" , :platform => :jruby
 gem 'twitter-bootstrap-rails' , :platform => :ruby
 gem 'fancybox-rails', :git => 'https://github.com/sverigemeny/fancybox-rails'
- 
+gem 'bluecloth'
