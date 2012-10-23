@@ -5,6 +5,7 @@
 $(document).ready( ->
   
   topBar(0)
+  message_hiding = false
   
   $(document).scroll( ->
     
@@ -17,18 +18,25 @@ $(document).ready( ->
     if scroll >= 396  
       home_message.addClass('fixed') 
       technologies.css('margin-top' , 162)
+      technologies.addClass('color')
       
       if scroll >= 1200
-        home_message.css('top' , 1220 - scroll)
+        #home_message.css('top' , 1220 - scroll)
+        home_message.animate({'top' : -400} , 1000 , -> this.stop(true))
+        
         
         if scroll >= 1328
           $('#portfolio').addClass('fixed')
         else   
           $('#portfolio').removeClass('fixed')
           
+      else
+        #home_message.animate({ 'top' : 10 } , 1000 , -> this.stop(true))
+          
     else 
       home_message.removeClass("fixed")
       technologies.css('margin-top' , 20) 
+      technologies.removeClass('color')
     
   )
   

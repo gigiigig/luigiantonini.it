@@ -79,10 +79,10 @@ $shadows-color : #666;
   
   margin-top: 20px;
       
-  &:hover .technology .technology_image{
+  &:hover .technology .technology_image ,&.color .technology .technology_image  {
     @include filter(grayscale(0%) brightness(0.0));  
   }
- 
+  
   .technology {
     
     margin-top: 20px;
