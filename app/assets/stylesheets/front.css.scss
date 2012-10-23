@@ -7,8 +7,11 @@
 @import "compass/css3/transition";
 
 $borders-color : #cdcdcd;
+$shadows-color : #666;
 
 #home_message {
+  
+  @include transition(box-shadow 2s);
   
   overflow: hidden;
   margin-top: 20px;
@@ -21,6 +24,7 @@ $borders-color : #cdcdcd;
   border-bottom: 1px;
   border-style: solid;
   border-color: $borders-color;
+  
   
   #home_message_shadow_top {
     position: absolute;
@@ -55,7 +59,7 @@ $borders-color : #cdcdcd;
     position: fixed;
     top: 10px;
     background-image: image-url('background.png');
-    
+    @include box-shadow(0 4px 10px -8px $shadows-color);
   }
    
 }
