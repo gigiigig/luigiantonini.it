@@ -25,34 +25,41 @@ $(document).ready( ->
     home_message = $("#home_message")
     technologies = $(".technologies")
     
-    if scroll >= 528  
-      home_message.addClass('fixed') 
-      technologies.css('margin-top' , 162)
-      technologies.addClass('color')
-      
-      if scroll >= 1300
-        #home_message.css('top' , 1220 - scroll)
-        if(!message_hidden)
-          home_message.stop(true).animate({'top' : -110} , 1000 , -> )
-          message_hidden = true
-          
-        if scroll >= 1450
-          $('#portfolio').addClass('fixed')
-          $('.works').css('margin-top' , 137)
-        else   
-          $('#portfolio').removeClass('fixed')
-          $('.works').css('margin-top' , 20)
-          
-      else
-      
-        if(message_hidden)
-          home_message.stop(true).animate({ 'top' : 10 } , 1000 , -> )
-          message_hidden = false
-          
-    else 
-      home_message.removeClass("fixed")
-      technologies.css('margin-top' , 20) 
-      technologies.removeClass('color')
+    fixableElement(scroll , home_message , technologies , 528 ,1100)
+    
+    portfolio = $("#portfolio")
+    works = $(".works")
+    fixableElement(scroll , portfolio , works , 1300 ,2000)
+    
+    
+    # if scroll >= 528  
+      # home_message.addClass('fixed') 
+      # technologies.css('margin-top' , 162)
+      # technologies.addClass('color')
+#       
+      # if scroll >= 1300
+        # #home_message.css('top' , 1220 - scroll)
+        # if(!message_hidden)
+          # home_message.stop(true).animate({'top' : -110} , 1000 , -> )
+          # message_hidden = true
+#           
+        # if scroll >= 1450
+          # $('#portfolio').addClass('fixed')
+          # $('.works').css('margin-top' , 137)
+        # else   
+          # $('#portfolio').removeClass('fixed')
+          # $('.works').css('margin-top' , 20)
+#           
+      # else
+#       
+        # if(message_hidden)
+          # home_message.stop(true).animate({ 'top' : 10 } , 1000 , -> )
+          # message_hidden = false
+#           
+    # else 
+      # home_message.removeClass("fixed")
+      # technologies.css('margin-top' , 20) 
+      # technologies.removeClass('color')
     
   )
   
@@ -95,7 +102,43 @@ topBar = (scroll) ->
   brand.css("font-size" , font_size)
   brand.css("padding-top" , 8 + padding / 4)
   brand.html(scroll)
+  
 
+fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop) -> 
+
+  current_hidden = current_elem.data('current_hidden')
+  current_fixed = current_elem.data('current_fixed')
+  
+  if scroll >= fixed_start  
+    
+    if !current_fixed
+      current_elem.addClass('fixed') 
+      new_margin = getMarginTop(current_elem) + current_elem.height()
+      bottom_elem.css('margin-top', new_margin + 'px' )
+      current_fixed = true      
+
+    if scroll >= fixed_stop
+      current_fixed = false  
+      #current_elem.css('top' , 1220 - scroll)
+      if(!current_hidden)
+        current_elem.stop(true).animate({'top' : -110} , 1000 , -> )
+        current_hidden = true
+             
+    else
+      if(current_hidden)
+        current_elem.stop(true).animate({ 'top' : 10 } , 1000 , -> )
+        current_hidden = false
+        
+  else 
+    if current_fixed
+      current_elem.removeClass("fixed")
+      bottom_elem.css('margin-top',getMarginTop(current_elem) - current_elem.height())
+      current_fixed = false  
+   
+  current_elem.data('current_hidden' , current_hidden)
+  current_elem.data('current_fixed' , current_fixed)   
+      
+   
 
 scrollTo = (id) ->
   
@@ -108,3 +151,5 @@ scrollToVal = (val) ->
     {scrollTop: val} , 3000, 'easeInOutExpo'
   )  
 
+getMarginTop = (elem) ->
+  parseInt(elem.css('margin-top').replace('px', ''))
