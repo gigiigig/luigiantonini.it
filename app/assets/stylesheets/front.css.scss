@@ -16,6 +16,13 @@ $shadows-color : #666;
     background-image: image-url('home_image.png');
     background-position: center;
     height: 372px;
+    margin-top: -10;
+    
+    &.with_shadow{
+       @include box-shadow(#666 0 -5px 10px -8px inset);    
+    }
+    @include transition(box-shadow 2s);
+
   }
   
 }
@@ -70,7 +77,7 @@ $shadows-color : #666;
     position: fixed;
     top: 10px;
     background-image: image-url('background.png');
-    @include box-shadow(0 4px 10px -8px $shadows-color);
+    @include box-shadow($shadows-color 0 4px 10px -8px);
   }
    
 }
@@ -80,8 +87,9 @@ $shadows-color : #666;
   
     z-index: 1000;
     position: fixed;
-    top: 10px;
+    top: -40px;
     background-image: image-url('background.png');
+    @include box-shadow($shadows-color 0 4px 10px -8px);
     
   }
 }
