@@ -25,41 +25,12 @@ $(document).ready( ->
     home_message = $("#home_message")
     technologies = $(".technologies")
     
-    fixableElement(scroll , home_message , technologies , 528 ,1100)
+    
+    fixableElement(scroll , home_message , technologies , 528 ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) )
     
     portfolio = $("#portfolio")
     works = $(".works")
     fixableElement(scroll , portfolio , works , 1300 ,2000)
-    
-    
-    # if scroll >= 528  
-      # home_message.addClass('fixed') 
-      # technologies.css('margin-top' , 162)
-      # technologies.addClass('color')
-#       
-      # if scroll >= 1300
-        # #home_message.css('top' , 1220 - scroll)
-        # if(!message_hidden)
-          # home_message.stop(true).animate({'top' : -110} , 1000 , -> )
-          # message_hidden = true
-#           
-        # if scroll >= 1450
-          # $('#portfolio').addClass('fixed')
-          # $('.works').css('margin-top' , 137)
-        # else   
-          # $('#portfolio').removeClass('fixed')
-          # $('.works').css('margin-top' , 20)
-#           
-      # else
-#       
-        # if(message_hidden)
-          # home_message.stop(true).animate({ 'top' : 10 } , 1000 , -> )
-          # message_hidden = false
-#           
-    # else 
-      # home_message.removeClass("fixed")
-      # technologies.css('margin-top' , 20) 
-      # technologies.removeClass('color')
     
   )
   
@@ -104,7 +75,7 @@ topBar = (scroll) ->
   brand.html(scroll)
   
 
-fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop) -> 
+fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
 
   current_hidden = current_elem.data('current_hidden')
   current_fixed = current_elem.data('current_fixed')
@@ -115,6 +86,10 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
       current_elem.addClass('fixed') 
       new_margin = getMarginTop(current_elem) + current_elem.height()
       bottom_elem.css('margin-top', new_margin + 'px' )
+      
+      if fixed_callback != null
+        fixed_callback()
+        
       current_fixed = true      
 
     if scroll >= fixed_stop
@@ -123,6 +98,9 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
       if(!current_hidden)
         current_elem.stop(true).animate({'top' : -110} , 1000 , -> )
         current_hidden = true
+        
+        if (hidden_callback != null)
+          hidden_callback()
              
     else
       if(current_hidden)
@@ -133,7 +111,12 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
     if current_fixed
       current_elem.removeClass("fixed")
       bottom_elem.css('margin-top',getMarginTop(current_elem) - current_elem.height())
+      
+      if static_callback != null
+        static_callback()
+      
       current_fixed = false  
+      
    
   current_elem.data('current_hidden' , current_hidden)
   current_elem.data('current_fixed' , current_fixed)   
