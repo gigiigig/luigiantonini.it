@@ -5,12 +5,21 @@
 $(document).ready( ->
   
   topBar(0)
-  message_hiding = false
+  
+  $('a.portfolio').click( (e) ->
+    e.preventDefault() 
+    scrollTo('portfolio'))  
+  
+  message_hidden = false
+  home_image = $('#home_image')
+  home_image_original_height = home_image.height()  
   
   $(document).scroll( ->
     
     scroll = $(window).scrollTop()
     topBar(scroll)
+    
+    homeImage(scroll ,home_image_original_height , home_image)
     
     home_message = $("#home_message")
     technologies = $(".technologies")
@@ -22,16 +31,20 @@ $(document).ready( ->
       
       if scroll >= 1200
         #home_message.css('top' , 1220 - scroll)
-        home_message.animate({'top' : -400} , 1000 , -> this.stop(true))
-        
-        
+        if(!message_hidden)
+          home_message.stop(true).animate({'top' : -110} , 1000 , -> )
+          message_hidden = true
+          
         if scroll >= 1328
           $('#portfolio').addClass('fixed')
         else   
           $('#portfolio').removeClass('fixed')
           
       else
-        #home_message.animate({ 'top' : 10 } , 1000 , -> this.stop(true))
+      
+        if(message_hidden)
+          home_message.stop(true).animate({ 'top' : 10 } , 1000 , -> )
+          message_hidden = false
           
     else 
       home_message.removeClass("fixed")
@@ -44,6 +57,12 @@ $(document).ready( ->
 
 )
 
+homeImage = (scroll , original_height  ,container) ->
+  
+  image = $('#home_image')
+  container.height(original_height - scroll)
+  container.css('margin-top' , scroll / 1.2)
+  
 topBar = (scroll) -> 
   
   top_bar = $('.navbar-inner ul.nav')
@@ -70,3 +89,10 @@ topBar = (scroll) ->
   brand.css("font-size" , font_size)
   brand.css("padding-top" , 8 + padding / 4)
   brand.html(scroll)
+
+
+scrollTo = (id) ->
+  
+  $('html,body').animate(
+    {scrollTop: $("##{id}").offset().top} , 3000, 'easeInOutExpo'
+  )  

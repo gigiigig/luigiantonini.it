@@ -51,7 +51,7 @@
                 'data-fancybox-type' => "iframe" , :class => 'fancybox' %>
               </li>
               <li>
-                <%= link_to t(:portfolio), "/portfolio"  %>
+                <%= link_to t(:portfolio), "/portfolio" , :class => 'portfolio'  %>
               </li>
               <li>
                 <%= link_to t(:contact), "/contact"  %>
@@ -63,10 +63,13 @@
     </div>
 
     <!--     <div id="white_bar"></div> -->
-    <div class="container">
+    <div class="container" id="home_image_container">
 
       <div class="row">
-        <%= image_tag "home_image.png" , :class => "span12" , :style => "margin-top: -20px" , :id => "banner" %>
+        <%= # image_tag "home_image.png" , :class => "span12" , :style => "margin-top: -20px" , :id => "banner" 
+        %>
+        <div id="home_image" class="span12"></div>
+        
       </div>
 
       <div class="content">

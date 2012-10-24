@@ -9,6 +9,17 @@
 $borders-color : #cdcdcd;
 $shadows-color : #666;
 
+#home_image_container {
+  overflow: hidden;
+  
+  #home_image {
+    background-image: image-url('home_image.png');
+    background-position: center;
+    height: 372px;
+  }
+  
+}
+
 #home_message {
   
   @include transition(box-shadow 2s);
