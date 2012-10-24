@@ -18,7 +18,7 @@ ActiveAdmin.register Work  do
     f.inputs "Product images" do
       f.has_many :pictures do |p|
         p.input :image, :as => :file , :hint => !p.object.image.exists? ? p.template.content_tag(:span, "No Image Yet") : p.template.image_tag(p.object.image.url(:thumb))
-      #p.input :_destroy, :as=>:boolean, :required => false, :label => 'Remove image'
+        p.input :_destroy, :as=>:boolean, :required => false, :label => 'Remove image'
       end
     end
 
