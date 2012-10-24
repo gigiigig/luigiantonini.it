@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.core
 //= require twitter/bootstrap
+//= require jquery.isotope.min
 //= require fancybox
 //= require_tree .
 
