@@ -21,12 +21,15 @@ ActiveAdmin.register Technology do
 
   index :as => :grid  , :download_links => false do |t|
 
-    link_to admin_technology_path(t) do
-      content_tag(:h3 , t.name) +
-      image_tag(t.image.url(:normal))
+    div :style => "height: 150px" do
+      link_to admin_technology_path(t) do
+        content_tag(:h3 , t.name) +
+        image_tag(t.image.url(:normal))  
+      end 
     end
-
-  #link_to(html, admin_technology_path(t))
+    div do 
+        link_to(t(:edit), edit_admin_technology_path(t))
+    end
 
   end
 

@@ -24,13 +24,12 @@ $(document).ready( ->
     
     home_message = $("#home_message")
     technologies = $(".technologies")
-    
-    
+        
     fixableElement(scroll , home_message , technologies , 528 ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) )
     
     portfolio = $("#portfolio")
     works = $(".works")
-    fixableElement(scroll , portfolio , works , 1300 ,2000)
+    fixableElement(scroll , portfolio , works , 1380 ,2000)
     
   )
   
