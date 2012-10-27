@@ -4,6 +4,12 @@
 
 $(document).ready( ->
   
+  home_message_fixed_at = 420
+  home_message_hidden_at = 1150
+  portfolio_fixed_at = 1325
+  portfolio_hidden_at = 2050
+
+  
   topBar(0)
   
   $('a.portfolio').click( (e) ->
@@ -19,17 +25,17 @@ $(document).ready( ->
     scroll = $(window).scrollTop()
     topBar(scroll)
     
-    if(scroll < 500)
+    if(scroll < home_message_fixed_at)
       homeImage(scroll ,home_image_original_height , home_image)
     
     home_message = $("#home_message")
     technologies = $(".technologies")
         
-    fixableElement(scroll , home_message , technologies , 528 ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) )
+    fixableElement(scroll , home_message , technologies , home_message_fixed_at ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) )
     
     portfolio = $("#portfolio")
     works = $(".works")
-    fixableElement(scroll , portfolio , works , 1380 ,2000)
+    fixableElement(scroll , portfolio , works , portfolio_fixed_at ,portfolio_hidden_at)
     
   )
   
@@ -39,8 +45,11 @@ $(document).ready( ->
 
 homeImage = (scroll , original_height  ,container) ->
     
-  container.height(original_height - scroll / 1.7)
-  container.css('margin-top' , -10 + scroll / 1.2)
+  #container.height(original_height - scroll / 1.7)
+  #container.css('margin-top' , -20 + scroll / 1.1)
+  
+  container.css('background-position' , 'center ' + ( 40 - scroll / 10) + 'px')
+  
   if scroll == 0
     container.removeClass('with_shadow')
   else
@@ -79,12 +88,15 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
   current_hidden = current_elem.data('current_hidden')
   current_fixed = current_elem.data('current_fixed')
   
+  console.log("current_hidden : #{current_hidden}" )
+  console.log("current_fixed : #{current_fixed}" )
+  
   if scroll >= fixed_start  
     
     if !current_fixed
       current_elem.addClass('fixed') 
-      new_margin = getMarginTop(current_elem) + current_elem.height()
-      bottom_elem.css('margin-top', new_margin + 'px' )
+      new_margin = getMarginTop(current_elem) + getPaddingTop(current_elem) + current_elem.height()
+      bottom_elem.css('margin-top', (getMarginTop(bottom_elem) + new_margin) + 'px' )
       
       if fixed_callback != null
         fixed_callback()
@@ -130,8 +142,13 @@ scrollTo = (id) ->
   
 scrollToVal = (val) ->
   $('html,body').animate(
-    {scrollTop: val} , 3000, 'easeInOutExpo'
+    {scrollTop: val} , 3000, 'easeInOutCubic'
   )  
 
 getMarginTop = (elem) ->
   parseInt(elem.css('margin-top').replace('px', ''))
+  
+getPaddingTop = (elem) ->
+  parseInt(elem.css('padding-top').replace('px', ''))
+  
+  
