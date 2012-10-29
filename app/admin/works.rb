@@ -11,6 +11,7 @@ ActiveAdmin.register Work  do
       f.input :name
       f.input :description
       f.input :date
+      f.input :category , :as => :select , :collection => ["Web" , "Mobile" , "Application"]
       f.input :cover, :as => :file, :hint => if(f.object.cover.exists?) then f.template.image_tag(f.object.cover.url(:thumb)) end
       f.input :delete_cover , :as => :boolean
     end
@@ -26,7 +27,7 @@ ActiveAdmin.register Work  do
 
   end
 
-  index :download_links => false do 
+  index :download_links => false do
 
     column :name
     column :description
@@ -43,7 +44,7 @@ ActiveAdmin.register Work  do
     default_actions
 
   end
-  
+
   show do
     attributes_table do
       row :name

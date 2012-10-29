@@ -8,6 +8,7 @@
 
 $borders-color : #cdcdcd;
 $shadows-color : #666;
+$link-color: #999;
 
 #home_image_container {
   overflow: hidden;
@@ -84,7 +85,24 @@ $shadows-color : #666;
    
 }
 
+
+h2{
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 26px;
+}
+
+.section_title {
+  margin-top: 80px;
+  border-bottom: 1px solid $borders-color;
+}
+
+
 #portfolio {
+  
+  padding-top: 10px;
+  
   &.fixed {
   
     z-index: 1000;
@@ -93,7 +111,35 @@ $shadows-color : #666;
     background-image: image-url('background.png');
     @include box-shadow($shadows-color 0 4px 10px -8px);
     
+    .menu {
+       @include opacity(1);
+    }
+    
   }
+  
+  .menu{
+    
+    @include transition-property(all);
+    @include transition-duration(500ms); 
+    @include opacity(0);
+    
+    margin-top: 10px;
+    a , span {
+      font-weight: normal;
+      float: right;
+      padding-right: 10px;
+      font-size: 16px;
+    } 
+    a {
+      color: $link-color;
+    }
+    span{
+      color: #666;
+    }
+    
+  } 
+  
+  
 }
 
 .technologies{
@@ -130,21 +176,10 @@ $shadows-color : #666;
 }
 
 #curriculum {
-  
   #header {display: none;}
-  
 }
 
-h2{
-  font-family: "Times New Roman", Times, serif;
-  font-style: italic;
-  font-weight: normal;
-  font-size: 26px;
-  margin-top: 80px;
-  border-bottom: 1px solid $borders-color;
-}
-
-.works {
+#works {
   
   margin-top: 20px;
   

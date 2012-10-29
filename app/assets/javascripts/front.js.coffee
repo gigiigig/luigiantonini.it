@@ -8,9 +8,12 @@ $(document).ready( ->
   home_message_hidden_at = 1150
   portfolio_fixed_at = 1350
   portfolio_hidden_at = 1800
-
   
   topBar(0)
+  
+  isotopeLink('#works' , '#portfolio_all')
+  isotopeLink('#works' , '#portfolio_web' , '.web')
+  isotopeLink('#works' , '#portfolio_mobile' , '.mobile')
   
   $('a.portfolio').click( (e) ->
     e.preventDefault() 
@@ -34,7 +37,7 @@ $(document).ready( ->
     fixableElement(scroll , home_message , technologies , home_message_fixed_at ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) )
     
     portfolio = $("#portfolio")
-    works = $(".works")
+    works = $("#works")
     fixableElement(scroll , portfolio , works , portfolio_fixed_at ,portfolio_hidden_at)
     
   )
@@ -136,8 +139,16 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
   current_elem.data('current_fixed' , current_fixed)   
       
 
+isotopeLink = (container, link ,filter = null) ->
+  $(link).click( -> 
+    if(filter != null)
+      $(container).isotope({ filter: filter })
+    else  
+      $(container).isotope()
+    return false
+  )
+
 scrollTo = (id) ->
-  
   $('html,body').animate(
     {scrollTop: $("##{id}").offset().top} , 3000, 'easeInOutExpo'
   )  

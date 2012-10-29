@@ -28,13 +28,20 @@
   <% end %>
 </div>
 
-<div class="row">
-  <h2 class="span12" id="portfolio">Portfolio</h2>
+<div class="row section_title" id="portfolio">
+  <h2 class="span6">Portfolio</h2>
+  <div class="span6 menu">
+    <a href="" id="portfolio_all">All</a>
+    <span>/</span>
+    <a href="" id="portfolio_web">Web</a>
+    <span>/</span>
+    <a href="" id="portfolio_mobile">Mobile</a>
+  </div>
 </div>
 
-<div class="row works">
+<div class="row" id="works">
   <% @works.each do |t| %>
-  <div class="work span4">
+  <div class="work span4 <%= t.category.downcase %>">
     <img class=" work_image" src="<%= t.cover.url(:thumb) %>" />
     <h3> <%= t.name %> </h3>
   </div>
