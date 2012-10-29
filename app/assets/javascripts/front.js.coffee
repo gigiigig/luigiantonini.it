@@ -6,8 +6,8 @@ $(document).ready( ->
   
   home_message_fixed_at = 420
   home_message_hidden_at = 1150
-  portfolio_fixed_at = 1325
-  portfolio_hidden_at = 2050
+  portfolio_fixed_at = 1350
+  portfolio_hidden_at = 1800
 
   
   topBar(0)
@@ -85,54 +85,56 @@ topBar = (scroll) ->
 
 fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
 
+  current_elem_name = current_elem.attr('id')
   current_hidden = current_elem.data('current_hidden')
   current_fixed = current_elem.data('current_fixed')
   
+  console.log("current_elem : #{current_elem_name}" )
   console.log("current_hidden : #{current_hidden}" )
   console.log("current_fixed : #{current_fixed}" )
+  console.log("" )
   
-  if scroll >= fixed_start  
+  if scroll >= fixed_start && scroll <= fixed_stop  
     
-    if !current_fixed
+    if !current_fixed && !current_hidden
       current_elem.addClass('fixed') 
-      new_margin = getMarginTop(current_elem) + getPaddingTop(current_elem) + current_elem.height()
+      new_margin = getFullHeight(current_elem)
       bottom_elem.css('margin-top', (getMarginTop(bottom_elem) + new_margin) + 'px' )
       
       if fixed_callback != null
         fixed_callback()
         
       current_fixed = true      
-
-    if scroll >= fixed_stop
-      current_fixed = false  
-      #current_elem.css('top' , 1220 - scroll)
-      if(!current_hidden)
-        current_elem.stop(true).animate({'top' : -110} , 1000 , -> )
-        current_hidden = true
-        
-        if (hidden_callback != null)
-          hidden_callback()
              
     else
       if(current_hidden)
         current_elem.stop(true).animate({ 'top' : 10 } , 1000 , -> )
         current_hidden = false
+        current_fixed = true
+  
+  else if scroll >= fixed_stop
+    current_fixed = false  
+    #current_elem.css('top' , 1220 - scroll)
+    if(!current_hidden)
+      current_elem.stop(true).animate({'top' : -110} , 1000 , -> )
+      current_hidden = true
+      
+      if (hidden_callback != null)
+        hidden_callback()
         
   else 
-    if current_fixed
+    if current_fixed || current_hidden
       current_elem.removeClass("fixed")
-      bottom_elem.css('margin-top',getMarginTop(current_elem) - current_elem.height())
+      bottom_elem.css('margin-top', getMarginTop(bottom_elem) - getFullHeight(current_elem))
       
       if static_callback != null
         static_callback()
       
       current_fixed = false  
       
-   
   current_elem.data('current_hidden' , current_hidden)
   current_elem.data('current_fixed' , current_fixed)   
       
-   
 
 scrollTo = (id) ->
   
@@ -151,4 +153,6 @@ getMarginTop = (elem) ->
 getPaddingTop = (elem) ->
   parseInt(elem.css('padding-top').replace('px', ''))
   
-  
+
+getFullHeight = (elem) ->
+  getMarginTop(elem) + getPaddingTop(elem) + elem.height()
