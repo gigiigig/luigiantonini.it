@@ -2,42 +2,58 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+#elements scroll values
+home_message_fixed_at = 420
+home_message_hidden_at = 1150
+portfolio_fixed_at = 1350
+portfolio_hidden_at = 1800
+
 $(document).ready( ->
   
-  home_message_fixed_at = 420
-  home_message_hidden_at = 1150
-  portfolio_fixed_at = 1350
-  portfolio_hidden_at = 1800
-  
+  #start top bar animation
   topBar(0)
   
-  isotopeLink('#works' , '#portfolio_all')
-  isotopeLink('#works' , '#portfolio_web' , '.web')
-  isotopeLink('#works' , '#portfolio_mobile' , '.mobile')
+  #load menu elements
+  loadMenu()
   
-  $('a.portfolio').click( (e) ->
-    e.preventDefault() 
-    scrollToVal(1462))  
-  
-  message_hidden = false
+  #load isotope links
+  isotope_container = '#works'
+  isotopeLink(isotope_container , '#portfolio_all')
+  isotopeLink(isotope_container , '#portfolio_web' , '.web')
+  isotopeLink(isotope_container , '#portfolio_mobile' , '.mobile')
+  $(isotope_container).isotope()
+    
   home_image = $('#home_image')
   home_image_original_height = home_image.height()  
   
   $(document).scroll( ->
     
     scroll = $(window).scrollTop()
+    
+    #start top bar animation
     topBar(scroll)
     
+    #home image 
     if(scroll < home_message_fixed_at)
       homeImage(scroll ,home_image_original_height , home_image)
+
+    #auto scroll values
+    #if scroll > 30
+    #  scrollToVal(home_message_fixed_at)
+      
+    #if scroll > home_message_hidden_at
+    #  scrollToVal(portfolio_fixed_at)
     
+    #load home message function
     home_message = $("#home_message")
     technologies = $(".technologies")
-        
+
     fixableElement(scroll , home_message , technologies , home_message_fixed_at ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) )
     
+    #load portfolio title function
     portfolio = $("#portfolio")
     works = $("#works")
+    
     fixableElement(scroll , portfolio , works , portfolio_fixed_at ,portfolio_hidden_at)
     
   )
@@ -84,6 +100,14 @@ topBar = (scroll) ->
   brand.css("font-size" , font_size)
   brand.css("padding-top" , 8 + padding / 4)
   brand.html(scroll)
+  
+loadMenu = ->
+  loadMenuElem('a.portfolio',portfolio_fixed_at + 20)
+    
+loadMenuElem = (elem, scroll_value) ->
+  $(elem).click((e) ->
+    e.preventDefault() 
+    scrollToVal(scroll_value))
   
 
 fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
@@ -139,12 +163,12 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
   current_elem.data('current_fixed' , current_fixed)   
       
 
-isotopeLink = (container, link ,filter = null) ->
+isotopeLink = (container, link ,filter = '*') ->
   $(link).click( -> 
-    if(filter != null)
-      $(container).isotope({ filter: filter })
-    else  
-      $(container).isotope()
+    $(container).isotope({
+      itemSelector : '.work',
+      filter: filter
+    })
     return false
   )
 
