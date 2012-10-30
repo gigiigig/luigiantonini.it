@@ -8,7 +8,7 @@ class Work < ActiveRecord::Base
 
   validate :date , :description , :name ,  :presence => true
 
-  has_attached_file :cover , :styles => { :normal => "1024x640", :thumb => "370x246^" } , :default_url => "/assets/missing.png"
+  has_attached_file :cover , :styles => { :normal => "1024x640", :thumb => "370x246#" } , :default_url => "/assets/missing.png"
   
   before_validation { cover.clear if delete_cover == '1' }
   
