@@ -5,9 +5,16 @@
       <!-- <%= image_tag "home_message_shadow_top.png" , :id => "home_message_shadow_top" %>
       <%= image_tag "home_message_shadow_bottom.png" , :id => "home_message_shadow_bottom" %> -->
       <%= image_tag "virgolette.png" , :class => "span1" %>
-      <p class="header span11 ">
+      <p class="header span7 ">
         <%= t 'home_messages.head' %>
       </p>
+      <div class="span4 menu">
+        <a href="" id="technologies_all">All</a>
+        <span>/</span>
+        <a href="" id="technologies_language">Languages</a>
+        <span>/</span>
+        <a href="" id="technologies_framework">Frameworks</a>
+      </div>
       <p class="text span11 offset1">
         <%= t 'home_messages.text' %>
       </p>
@@ -15,9 +22,9 @@
   </div>
 </div>
 
-<div class="row technologies">
+<div class="row" id="technologies">
   <% @technologies.each do |t| %>
-  <div class="technology span4">
+  <div class="technology span4 <%= t.type.downcase %>">
     <div class="row">
       <div class="span2 offset1 technology_image" style="background-image: url(<%= t.image.url(:normal) %>);"></div>
       <p class="span4 description">

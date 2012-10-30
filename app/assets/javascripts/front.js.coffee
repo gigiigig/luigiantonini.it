@@ -16,12 +16,20 @@ $(document).ready( ->
   #load menu elements
   loadMenu()
   
-  #load isotope links
-  isotope_container = '#works'
-  isotopeLink(isotope_container , '#portfolio_all')
-  isotopeLink(isotope_container , '#portfolio_web' , '.web')
-  isotopeLink(isotope_container , '#portfolio_mobile' , '.mobile')
-  $(isotope_container).isotope()
+  #load isotope links for portfolio
+  works_container = '#works'
+  isotopeLink(works_container , '#portfolio_all')
+  isotopeLink(works_container , '#portfolio_web' , '.web')
+  isotopeLink(works_container , '#portfolio_mobile' , '.mobile')
+  $(works_container).isotope()
+  
+  #load isotope links for works
+  technologies_container = '#technologies'
+  isotopeLink(technologies_container , '#technologies_all')
+  isotopeLink(technologies_container , '#technologies_language' , '.language')
+  isotopeLink(technologies_container , '#technologies_framework' , '.framework')
+  $(technologies_container).isotope()
+  
     
   home_image = $('#home_image')
   home_image_original_height = home_image.height()  
@@ -46,7 +54,7 @@ $(document).ready( ->
     
     #load home message function
     home_message = $("#home_message")
-    technologies = $(".technologies")
+    technologies = $("#technologies")
 
     fixableElement(scroll , home_message , technologies , home_message_fixed_at ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) )
     
@@ -167,6 +175,8 @@ isotopeLink = (container, link ,filter = '*') ->
   $(link).click( -> 
     $(container).isotope({
       itemSelector : '.work',
+      layoutMode : 'fitRows',
+      sortBy : 'random', 
       filter: filter
     })
     return false
@@ -175,7 +185,10 @@ isotopeLink = (container, link ,filter = '*') ->
 scrollTo = (id) ->
   $('html,body').animate(
     {scrollTop: $("##{id}").offset().top} , 3000, 'easeInOutExpo'
-  )  
+  )
+  
+elemPosition = (elem) ->
+  $("#{elem}").offset().top
   
 scrollToVal = (val) ->
   $('html,body').animate(

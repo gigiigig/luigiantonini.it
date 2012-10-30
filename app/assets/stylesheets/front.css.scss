@@ -30,9 +30,32 @@ $link-color: #999;
   
 }
 
+
+.menu{
+    
+    @include transition-property(all);
+    @include transition-duration(500ms); 
+    @include opacity(0);
+   
+    a , span {
+      font-weight: normal;
+      float: right;
+      padding-right: 10px;
+      font-size: 16px;
+    } 
+    a {
+      color: $link-color;
+    }
+    span{
+      color: #666;
+    }
+    
+  } 
+
 #home_message {
   
   @include transition(box-shadow 2s);
+  @include transition(height 1s);
   
   overflow: hidden;
   margin-top: 20px;
@@ -80,7 +103,14 @@ $link-color: #999;
     position: fixed;
     top: 10px;
     background-image: image-url('background.png');
+    height: 56px;
     @include box-shadow($shadows-color 0 4px 10px -8px);
+    
+    .menu {
+      @include opacity(1);
+      padding-top: 34px;
+    }
+    
   }
    
 }
@@ -113,38 +143,17 @@ h2{
     
     .menu {
        @include opacity(1);
+       padding-top: 10px;
     }
     
   }
   
-  .menu{
-    
-    @include transition-property(all);
-    @include transition-duration(500ms); 
-    @include opacity(0);
-    
-    margin-top: 10px;
-    a , span {
-      font-weight: normal;
-      float: right;
-      padding-right: 10px;
-      font-size: 16px;
-    } 
-    a {
-      color: $link-color;
-    }
-    span{
-      color: #666;
-    }
-    
-  } 
-  
-  
 }
 
-.technologies{
+#technologies{
   
   margin-top: 20px;
+  max-height: 600px;
       
   &:hover .technology .technology_image ,&.color .technology .technology_image  {
     @include filter(grayscale(0%) brightness(0.0));  
