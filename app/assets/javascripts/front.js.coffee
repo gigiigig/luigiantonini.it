@@ -3,9 +3,9 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 #elements scroll values
-home_message_fixed_at = 420
+home_message_fixed_at = 460
 home_message_hidden_at = 1150
-portfolio_fixed_at = 1350
+portfolio_fixed_at = 1234
 portfolio_hidden_at = 1800
 
 $(document).ready( ->
@@ -17,20 +17,31 @@ $(document).ready( ->
   loadMenu()
   
   #load isotope links for portfolio
-  works_container = '#works'
-  isotopeLink(works_container , '#portfolio_all')
-  isotopeLink(works_container , '#portfolio_web' , '.web')
-  isotopeLink(works_container , '#portfolio_mobile' , '.mobile')
-  $(works_container).isotope()
+  works_isotope = -> 
+    filters = '#portfolio_all': '*' , '#portfolio_web' : '.web' , '#portfolio_mobile' : '.mobile'
+    isotopize('#works' , filters)
   
   #load isotope links for works
-  technologies_container = '#technologies'
-  isotopeLink(technologies_container , '#technologies_all')
-  isotopeLink(technologies_container , '#technologies_language' , '.language')
-  isotopeLink(technologies_container , '#technologies_framework' , '.framework')
-  $(technologies_container).isotope()
+  technologies_isotope = ->
+    filters = '#technologies_all': '*' , '#technologies_language' : '.language' , '#technologies_framework' : '.framework' 
+    isotopize('#technologies' , filters)
   
-    
+  isotopize =  (container , filters) ->
+    for elem , filter of filters
+      isotopeLink(container ,elem , filter) 
+    container = $(container)  
+    if container.height() != container.data('height')
+      container.data('height', container.height()) 
+      $(container).isotope()
+       
+  #load isotope     
+  technologies_isotope()
+  works_isotope()
+  $(window).resize( ->
+    technologies_isotope()
+    works_isotope()  
+  )
+        
   home_image = $('#home_image')
   home_image_original_height = home_image.height()  
   

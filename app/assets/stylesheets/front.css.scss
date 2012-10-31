@@ -55,7 +55,7 @@ $link-color: #999;
 #home_message {
   
   @include transition(box-shadow 2s);
-  @include transition(height 1s);
+  //@include transition(all 1s);
   
   overflow: hidden;
   margin-top: 20px;
@@ -69,6 +69,10 @@ $link-color: #999;
   border-style: solid;
   border-color: $borders-color;
   
+  
+  .row{
+    @include transition(all 1s);
+  }
   
   #home_message_shadow_top {
     position: absolute;
@@ -85,9 +89,11 @@ $link-color: #999;
     font-family:"Times New Roman", Times, serif;
     
     &.header {
+      @include transition(padding-top 1s);
       font-size: 30px;
       font-style: italic;
       padding-top: 15px;
+      
       //background-image: image-url("virgolette.png");
     }
     &.text{
@@ -98,17 +104,29 @@ $link-color: #999;
   }
     
   &.fixed {
+    
+    .row{
+      padding-top: 40px;
+    }
   
     z-index: 1000;
     position: fixed;
-    top: 10px;
+    top: -30px;
     background-image: image-url('background.png');
-    height: 56px;
     @include box-shadow($shadows-color 0 4px 10px -8px);
     
     .menu {
       @include opacity(1);
       padding-top: 34px;
+    }
+    
+    p {
+      &.header {
+        //padding-top: 30px;
+      }
+      &.text {
+        display: none;
+      }
     }
     
   }
