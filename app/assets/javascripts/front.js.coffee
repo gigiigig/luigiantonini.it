@@ -30,8 +30,8 @@ $(document).ready( ->
     for elem , filter of filters
       isotopeLink(container ,elem , filter) 
     container = $(container)  
-    if container.height() != container.data('height')
-      container.data('height', container.height()) 
+    if container.width() != container.data('width')
+      container.data('width', container.width()) 
       $(container).isotope()
        
   #load isotope     
@@ -144,7 +144,11 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
     
     if !current_fixed && !current_hidden
       current_elem.addClass('fixed') 
-      new_margin = getFullHeight(current_elem)
+      new_margin = getFullHeight(current_elem) 
+      
+      # save elemento top value to use when elemen return
+      current_elem.data('top' , current_elem.css('top'))
+      
       bottom_elem.css('margin-top', (getMarginTop(bottom_elem) + new_margin) + 'px' )
       
       if fixed_callback != null
@@ -154,7 +158,7 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
              
     else
       if(current_hidden)
-        current_elem.stop(true).animate({ 'top' : 10 } , 1000 , -> )
+        current_elem.stop(true).animate({ 'top' : current_elem.data('top') } , 1000 , -> )
         current_hidden = false
         current_fixed = true
   
@@ -171,6 +175,7 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
   else 
     if current_fixed || current_hidden
       current_elem.removeClass("fixed")
+      current_elem.removeAttr('style')
       bottom_elem.css('margin-top', getMarginTop(bottom_elem) - getFullHeight(current_elem))
       
       if static_callback != null
