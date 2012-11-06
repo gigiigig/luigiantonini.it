@@ -10,7 +10,7 @@ $borders-color : #cdcdcd;
 $shadows-color : #666;
 $link-color: #999;
 
-#home_image_container {
+#container {
   overflow: hidden;
   
   #home_image {
@@ -212,7 +212,13 @@ h2{
   min-height: 900px;
   
   .work{
-   
+    
+    margin-top: 20px;
+    
+    h3{
+      padding: 5px;  
+      font-weight: normal;
+    }
     .work_image {
       background-position: center;
       background-repeat: no-repeat;

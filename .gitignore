@@ -16,3 +16,7 @@
 
 #add system folder to avoi papercli images upload
 /public/system/
+/public/assets/
+
+#vendor
+/vendor/cache/

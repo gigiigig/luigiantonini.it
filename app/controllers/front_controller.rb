@@ -2,6 +2,7 @@ class FrontController < ApplicationController
   def index
     @technologies = Technology.all(:order => "rand()" )
     @works = Work.all
+    @contact = Contact.new
   end
 
   def curriculum

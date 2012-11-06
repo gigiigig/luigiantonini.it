@@ -55,3 +55,19 @@
   <% end %>
 </div>
 
+<div class="row section_title" id="contact">
+  <h2 class="span6"><%= t :contact %></h2>
+</div>
+
+<div class="row">
+  <%= semantic_form_for :contact , :html => { :class => "span8" } do |f| %>
+
+  <%= f.input :name %>
+  <%= f.input :last_name %>
+  <%= f.input :email %>
+
+  <%= f.action :submit, :as => :button %>
+
+  <% end %>
+</div>
+
