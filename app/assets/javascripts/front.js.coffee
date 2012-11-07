@@ -2,14 +2,24 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-#elements scroll values
-home_message_fixed_at = 460
-home_message_hidden_at = 1150
-portfolio_fixed_at = 1234
-portfolio_hidden_at = 1800
-
 $(document).ready( ->
   
+  #load home message function
+  home_message = $("#home_message")
+  technologies = $("#technologies")
+     
+  #load portfolio title function
+  portfolio = $("#portfolio")
+  works = $("#works")    
+  
+  #elements scroll values
+  home_message_fixed_at = home_message.offset().top
+  home_message_hidden_at = technologies.offset().top + technologies.height() 
+  portfolio_fixed_at = portfolio.offset().top
+  portfolio_hidden_at = works.offset().top + works.height()
+    
+  alert("home_message_fixed_at : #{home_message_fixed_at.top}")
+    
   #start top bar animation
   topBar(0)
   
@@ -63,16 +73,8 @@ $(document).ready( ->
     #if scroll > home_message_hidden_at
     #  scrollToVal(portfolio_fixed_at)
     
-    #load home message function
-    home_message = $("#home_message")
-    technologies = $("#technologies")
-
     fixableElement(scroll , home_message , technologies , home_message_fixed_at ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) )
-    
-    #load portfolio title function
-    portfolio = $("#portfolio")
-    works = $("#works")
-    
+ 
     fixableElement(scroll , portfolio , works , portfolio_fixed_at ,portfolio_hidden_at)
     
   )
