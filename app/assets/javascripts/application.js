@@ -16,5 +16,5 @@
 //= require twitter/bootstrap
 //= require jquery.isotope.min
 //= require fancybox
-//= require_tree .
+//= require_tree . 
 

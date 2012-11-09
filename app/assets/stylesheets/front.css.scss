@@ -10,6 +10,10 @@ $borders-color : #cdcdcd;
 $shadows-color : #666;
 $link-color: #999;
 
+body{
+  @include transition(all 2s);
+}
+
 #container {
   overflow: hidden;
   
@@ -171,7 +175,6 @@ h2{
 #technologies{
   
   margin-top: 20px;
-  max-height: 600px;
       
   &:hover .technology .technology_image ,&.color .technology .technology_image  {
     @include filter(grayscale(0%) brightness(0.0));  

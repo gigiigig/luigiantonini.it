@@ -17,14 +17,12 @@ $(document).ready( ->
   home_message_hidden_at = technologies.offset().top + technologies.height() 
   portfolio_fixed_at = portfolio.offset().top
   portfolio_hidden_at = works.offset().top + works.height()
-    
-  alert("home_message_fixed_at : #{home_message_fixed_at.top}")
-    
+   
   #start top bar animation
   topBar(0)
   
   #load menu elements
-  loadMenu()
+  #loadMenu('a.portfolio' , portfolio_fixed_at)
   
   #load isotope links for portfolio
   works_isotope = -> 
@@ -35,25 +33,26 @@ $(document).ready( ->
   technologies_isotope = ->
     filters = '#technologies_all': '*' , '#technologies_language' : '.language' , '#technologies_framework' : '.framework' 
     isotopize('#technologies' , filters)
-  
-  isotopize =  (container , filters) ->
-    for elem , filter of filters
-      isotopeLink(container ,elem , filter) 
-    container = $(container)  
-    if container.width() != container.data('width')
-      container.data('width', container.width()) 
-      $(container).isotope()
-       
+      
   #load isotope     
-  technologies_isotope()
-  works_isotope()
-  $(window).resize( ->
-    technologies_isotope()
-    works_isotope()  
-  )
-        
+  #technologies_isotope()
+  #works_isotope()
+  #$(window).resize( ->
+  #  technologies_isotope()
+  #  works_isotope()  
+  #) 
+          
   home_image = $('#home_image')
-  home_image_original_height = home_image.height()  
+  home_image_original_height = home_image.height()
+    
+  #test to create javascript portfolio
+  $('.work').click(->
+    alert "change body position"
+    
+    body = $('body')
+    body.css('position' , 'relative')
+    body.css('left' ,-body.width())         
+  )
   
   $(document).scroll( ->
     
@@ -65,16 +64,8 @@ $(document).ready( ->
     #home image 
     if(scroll < home_message_fixed_at)
       homeImage(scroll ,home_image_original_height , home_image)
-
-    #auto scroll values
-    #if scroll > 30
-    #  scrollToVal(home_message_fixed_at)
-      
-    #if scroll > home_message_hidden_at
-    #  scrollToVal(portfolio_fixed_at)
     
-    fixableElement(scroll , home_message , technologies , home_message_fixed_at ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) )
- 
+    fixableElement(scroll , home_message , technologies , home_message_fixed_at ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) ) 
     fixableElement(scroll , portfolio , works , portfolio_fixed_at ,portfolio_hidden_at)
     
   )
@@ -122,8 +113,8 @@ topBar = (scroll) ->
   brand.css("padding-top" , 8 + padding / 4)
   brand.html(scroll)
   
-loadMenu = ->
-  loadMenuElem('a.portfolio',portfolio_fixed_at + 20)
+loadMenu = (elem , scroll)->
+  loadMenuElem(elem,scroll)
     
 loadMenuElem = (elem, scroll_value) ->
   $(elem).click((e) ->
@@ -188,6 +179,15 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
   current_elem.data('current_hidden' , current_hidden)
   current_elem.data('current_fixed' , current_fixed)   
       
+
+
+isotopize = (container , filters) ->
+  for elem , filter of filters
+    isotopeLink(container ,elem , filter) 
+  container = $(container)  
+  if container.width() != container.data('width')
+    container.data('width', container.width()) 
+    $(container).isotope()
 
 isotopeLink = (container, link ,filter = '*') ->
   $(link).click( -> 
