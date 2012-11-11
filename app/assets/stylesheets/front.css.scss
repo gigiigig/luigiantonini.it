@@ -148,28 +148,26 @@ h2{
 .section_title {
   margin-top: 80px;
   border-bottom: 1px solid $borders-color;
+  
+   &.fixed {
+     z-index: 1000;
+    position: fixed;
+    top: -80px;
+    background-image: image-url('background.png');
+    @include box-shadow($shadows-color 0 4px 10px -8px);
+  }
+  
 }
 
 
 #portfolio {
   
-  padding-top: 10px;
-  
-  &.fixed {
-  
-    z-index: 1000;
-    position: fixed;
-    top: -40px;
-    background-image: image-url('background.png');
-    @include box-shadow($shadows-color 0 4px 10px -8px);
-    
-    .menu {
-       @include opacity(1);
-       padding-top: 10px;
-    }
-    
+  padding-top: 48px;
+  .menu {
+     @include opacity(1);
+     padding-top: 10px;
   }
-  
+    
 }
 
 #technologies{

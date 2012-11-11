@@ -22,7 +22,7 @@ $(document).ready( ->
   topBar(0)
   
   #load menu elements
-  #loadMenu('a.portfolio' , portfolio_fixed_at)
+  loadMenu('a.portfolio' , portfolio_fixed_at)
   
   #load isotope links for portfolio
   works_isotope = -> 
@@ -47,11 +47,11 @@ $(document).ready( ->
     
   #test to create javascript portfolio
   $('.work').click(->
-    alert "change body position"
     
     body = $('body')
     body.css('position' , 'relative')
-    body.css('left' ,-body.width())         
+    body.css('left' ,-body.width())
+             
   )
   
   $(document).scroll( ->
@@ -67,6 +67,12 @@ $(document).ready( ->
     
     fixableElement(scroll , home_message , technologies , home_message_fixed_at ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) ) 
     fixableElement(scroll , portfolio , works , portfolio_fixed_at ,portfolio_hidden_at)
+    
+    #$('.section_title').each(->
+    #  elem = $(this)
+    #  next = elem.next()
+    #  fixableElement(scroll , elem , next , elem.offset().top , next.offset().top + next.height())
+    #)
     
   )
   
@@ -128,10 +134,10 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
   current_hidden = current_elem.data('current_hidden')
   current_fixed = current_elem.data('current_fixed')
   
-  console.log("current_elem : #{current_elem_name}" )
-  console.log("current_hidden : #{current_hidden}" )
-  console.log("current_fixed : #{current_fixed}" )
-  console.log("" )
+  #console.log("current_elem : #{current_elem_name}" )
+  #console.log("current_hidden : #{current_hidden}" )
+  #console.log("current_fixed : #{current_fixed}" )
+  #console.log("" )
   
   if scroll >= fixed_start && scroll <= fixed_stop  
     
@@ -139,7 +145,7 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
       current_elem.addClass('fixed') 
       new_margin = getFullHeight(current_elem) 
       
-      # save elemento top value to use when elemen return
+      # save element top value to use when elemen return
       current_elem.data('top' , current_elem.css('top'))
       
       bottom_elem.css('margin-top', (getMarginTop(bottom_elem) + new_margin) + 'px' )
@@ -159,7 +165,8 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
     current_fixed = false  
     #current_elem.css('top' , 1220 - scroll)
     if(!current_hidden)
-      current_elem.stop(true).animate({'top' : -110} , 1000 , -> )
+      new_top = (getFullHeight(current_elem) - getIntValue(current_elem.data('top')))      
+      current_elem.stop(true).animate({'top' : -new_top} , 1000 , -> )
       current_hidden = true
       
       if (hidden_callback != null)
@@ -212,6 +219,9 @@ scrollToVal = (val) ->
   $('html,body').animate(
     {scrollTop: val} , 3000, 'easeInOutCubic'
   )  
+
+getIntValue = (property) ->
+  parseInt(property.replace('px' , ''))
 
 getMarginTop = (elem) ->
   parseInt(elem.css('margin-top').replace('px', ''))
