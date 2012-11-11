@@ -11,12 +11,12 @@ $shadows-color : #666;
 $link-color: #999;
 
 body{
-  @include transition(all 2s);
 }
 
 #container {
   overflow: hidden;
-  
+  @include transition(left 2s);
+
   #home_image {
     background-image: image-url('home_image.png');
     background-position: center 40px;
@@ -146,6 +146,9 @@ h2{
 }
 
 .section_title {
+  @include transition(box-shadow 2s);
+  @include transition(left 2s);
+
   margin-top: 80px;
   border-bottom: 1px solid $borders-color;
   

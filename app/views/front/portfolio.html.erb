@@ -1,0 +1,12 @@
+<%= 3.times.each do |i| %>
+<% work = @works[i] %>
+<div class="row">
+  <div class="span6">
+    <%= image_tag work.cover.url(:thumb) %>
+  </div>
+  <div class="span6">
+    <%= work.name %>
+    <%= work.description %>
+  </div>
+</div>
+<% end %>

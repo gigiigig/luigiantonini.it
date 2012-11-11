@@ -48,11 +48,20 @@ $(document).ready( ->
   #test to create javascript portfolio
   $('.work').click(->
     
-    body = $('body')
+    body = $('#container')
     body.css('position' , 'relative')
-    body.css('left' ,-body.width())
+    body.css('left' ,-$(window).width())
+    #$('.section_title.fixed').css('left' , -body.width())
+    
+    $.get('portfolio' , (data) -> 
+      $('#portfolio_container').html(data)
+      $('#portfolio_container').show()
+      portfolio()
+    )
              
   )
+  
+ 
   
   $(document).scroll( ->
     

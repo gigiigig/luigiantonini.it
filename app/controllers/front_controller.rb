@@ -1,4 +1,5 @@
 class FrontController < ApplicationController
+  
   def index
     @technologies = Technology.all(:order => "rand()" )
     @works = Work.all
@@ -20,6 +21,11 @@ class FrontController < ApplicationController
     @curriculum = response.body
     @curriculum = @curriculum.gsub(/<style.*?>[\s\S]*<\/style>/i, "")
 
+  end
+  
+  def portfolio
+    @works = Work.all
+    render :layout => false
   end
 
 end
