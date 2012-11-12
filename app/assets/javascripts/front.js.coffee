@@ -4,8 +4,6 @@
 
 $(document).ready( ->
   
-  return
-  
   #load home message function
   home_message = $("#home_message")
   technologies = $("#technologies")
@@ -37,12 +35,12 @@ $(document).ready( ->
     isotopize('#technologies' , filters)
       
   #load isotope     
-  #technologies_isotope()
-  #works_isotope()
-  #$(window).resize( ->
-  #  technologies_isotope()
-  #  works_isotope()  
-  #) 
+  technologies_isotope()
+  works_isotope()
+  $(window).resize( ->
+   technologies_isotope()
+   works_isotope()  
+  ) 
           
   home_image = $('#home_image')
   home_image_original_height = home_image.height()
@@ -56,14 +54,14 @@ $(document).ready( ->
     body.css('left' ,-$(window).width())
     fixedElemHider($('.section_title.fixed'),'hide')
   
-    scrollToVal(0)
-    
-    right = ($(window).width() / 2) + portfolio_container.width() / 2
-    portfolio_container.css('right' , right)
-    
-    $.get('portfolio' , (data) -> 
-      portfolio_container.html(data)
-      window.portfolio()
+    scrollToVal(0 , ->
+      right = ($(window).width() / 2) + portfolio_container.width() / 2
+      portfolio_container.css('right' , right)
+      
+      $.get('portfolio' , (data) -> 
+        portfolio_container.html(data)
+        window.portfolio()
+      )
     )
            
   )
@@ -236,9 +234,9 @@ scrollTo = (id) ->
 elemPosition = (elem) ->
   $("#{elem}").offset().top
   
-scrollToVal = (val) ->
+scrollToVal = (val , callback) ->
   $('html,body').animate(
-    {scrollTop: val} , 3000, 'easeInOutCubic'
+    {scrollTop: val} , 3000, 'easeInOutCubic' , -> callback() 
   )  
 
 getIntValue = (property) ->

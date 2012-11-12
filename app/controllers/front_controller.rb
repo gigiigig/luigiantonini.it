@@ -1,5 +1,4 @@
 class FrontController < ApplicationController
-  
   def index
     @technologies = Technology.all(:order => "rand()" )
     @works = Work.all
@@ -17,15 +16,21 @@ class FrontController < ApplicationController
 
     request = Net::HTTP::Get.new(parsed_url.request_uri)
     response = http.request(request)
-   
+
     @curriculum = response.body
     @curriculum = @curriculum.gsub(/<style.*?>[\s\S]*<\/style>/i, "")
 
   end
-  
+
   def portfolio
-    @works = Work.all
-    #render :layout => false
+
+    if params[:id]
+      @work = Work.find params[:id]
+      render :action => 'work' , :layout => false
+    else
+      @works = Work.all
+      render :layout => false
+    end
   end
 
 end
