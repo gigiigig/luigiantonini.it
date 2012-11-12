@@ -25,7 +25,7 @@ class FrontController < ApplicationController
   
   def portfolio
     @works = Work.all
-    render :layout => false
+    #render :layout => false
   end
 
 end

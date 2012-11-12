@@ -2,7 +2,19 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-container = $('#portfolio_container')
+$(document).ready(-> 
+  window.portfolio()
+)
 
 window.portfolio = ->
-  alert 'ciao'
+  container = $('#portfolio_container')
+  impress_container = $('#impress_container')
+  impress_container.jmpress("route", ".basic");
+  impress_container.jmpress("route", ".anilib");
+  impress_container.jmpress()
+  impress_container.afterInit( -> 
+    $('.step').fadeOut();
+  )
+  
+  $('#left_arrow').click(-> impress_container.jmpress('prev'))
+  $('#right_arrow').click(-> impress_container.jmpress('next'))

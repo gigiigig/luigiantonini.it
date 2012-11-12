@@ -1,12 +1,18 @@
-<%= 3.times.each do |i| %>
-<% work = @works[i] %>
-<div class="row">
-  <div class="span6">
-    <%= image_tag work.cover.url(:thumb) %>
+<div id="impress_container">
+  
+  <%= 3.times.each do |i| %>
+  <% work = @works[i] %>
+  <div class="step" id="<%= work.name %>" data-z="<%= -(i * 1000)%>" data-jmpress="fade after prev">
+    <div class="">
+      <%= image_tag work.cover.url(:thumb) %>
+    </div>
+    <div class="">
+      <%= work.name %>
+      <%= work.description %>
+    </div>
   </div>
-  <div class="span6">
-    <%= work.name %>
-    <%= work.description %>
-  </div>
+  <% end %>
+  
 </div>
-<% end %>
+<div id="left_arrow" class="arrow"> </div>
+<div id="right_arrow" class="arrow"> </div>

@@ -1,2 +1,49 @@
+//Style for portfolio screen
+//all elements are in portfolio container
+@import "compass/css3";
+@import "compass/css3/appearance";
+@import "compass/css3/transition";
 
-#
+#portfolio_container {
+  
+  @include transition(right 2s);
+  
+  /*position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;*/
+ 
+  .step{
+    width: 900px;
+    height: 400px;
+  }
+      
+  .arrow{
+    position: absolute;
+    height: 100%;
+    width: 120px;
+    top: 50%;
+    left: 10px;
+    background-repeat: no-repeat; 
+    backgournd-position: center;
+    background-size: contain;
+  }
+  #left_arrow{
+    background-image: image-url('left_arrow.png');
+  }
+  #right_arrow{
+    background-image: image-url('right_arrow.png');
+    right: 10px;
+    left: auto;
+  }
+  
+  #impress_container {
+    /*position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;*/    
+  }  
+  
+}

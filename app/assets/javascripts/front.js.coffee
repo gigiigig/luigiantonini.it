@@ -4,6 +4,8 @@
 
 $(document).ready( ->
   
+  return
+  
   #load home message function
   home_message = $("#home_message")
   technologies = $("#technologies")
@@ -46,19 +48,24 @@ $(document).ready( ->
   home_image_original_height = home_image.height()
     
   #test to create javascript portfolio
+  portfolio_container = $('#portfolio_container') 
   $('.work').click(->
     
     body = $('#container')
     body.css('position' , 'relative')
     body.css('left' ,-$(window).width())
-    #$('.section_title.fixed').css('left' , -body.width())
+    fixedElemHider($('.section_title.fixed'),'hide')
+  
+    scrollToVal(0)
+    
+    right = ($(window).width() / 2) + portfolio_container.width() / 2
+    portfolio_container.css('right' , right)
     
     $.get('portfolio' , (data) -> 
-      $('#portfolio_container').html(data)
-      $('#portfolio_container').show()
-      portfolio()
+      portfolio_container.html(data)
+      window.portfolio()
     )
-             
+           
   )
   
  
@@ -155,7 +162,7 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
       new_margin = getFullHeight(current_elem) 
       
       # save element top value to use when elemen return
-      current_elem.data('top' , current_elem.css('top'))
+      fixedElemHider(current_elem, 'init')
       
       bottom_elem.css('margin-top', (getMarginTop(bottom_elem) + new_margin) + 'px' )
       
@@ -166,7 +173,7 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
              
     else
       if(current_hidden)
-        current_elem.stop(true).animate({ 'top' : current_elem.data('top') } , 1000 , -> )
+        fixedElemHider(current_elem , 'show')
         current_hidden = false
         current_fixed = true
   
@@ -174,8 +181,7 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
     current_fixed = false  
     #current_elem.css('top' , 1220 - scroll)
     if(!current_hidden)
-      new_top = (getFullHeight(current_elem) - getIntValue(current_elem.data('top')))      
-      current_elem.stop(true).animate({'top' : -new_top} , 1000 , -> )
+      fixedElemHider(current_elem , 'hide')
       current_hidden = true
       
       if (hidden_callback != null)
@@ -195,7 +201,13 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
   current_elem.data('current_hidden' , current_hidden)
   current_elem.data('current_fixed' , current_fixed)   
       
-
+fixedElemHider = (elem , operation) ->
+  switch operation
+    when "init" then elem.data('top' , elem.css('top'))
+    when "show" then elem.stop(true).animate({ 'top' : elem.data('top') } , 1000 , -> )
+    when "hide" 
+      new_top = (getFullHeight(elem) - getIntValue(elem.data('top')))      
+      elem.stop(true).animate({'top' : -new_top} , 1000 , -> )
 
 isotopize = (container , filters) ->
   for elem , filter of filters
