@@ -1,7 +1,21 @@
-<div class="span4">
-  <%= image_tag @swork.cover.url(:thumb) %>
-</div>
-<div class="">
-  <%= @work.name %>
-  <%= @work.description %>
+<div class="container">
+  <div class="row">
+    <div class="span4">
+      <%= image_tag @work.cover.url(:thumb) %>
+    </div>
+    <div class="span8">
+      <%= @work.name %>
+      <%= @work.description %>
+    </div>
+  </div>
+  <div class="row images">
+    <% @work.pictures.each do |picture| %>
+      <%= link_to picture.image.url() do  %>
+        <%= image_tag picture.image.url(:thumb) , :class => 'span1'%>
+      <% end %>
+    <% end %>
+  </div>
+  <script type="textt/javascript">
+    $('.images a').fancybox();
+  </script>
 </div>

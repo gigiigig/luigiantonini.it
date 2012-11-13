@@ -8,17 +8,20 @@
   
   @include transition(right 2s);
   
-  /*position: absolute;
+  position: absolute;
   top: 0px;
   left: 0px;
   height: 100%;
-  width: 100%;*/
- 
-  .step{
-    width: 900px;
-    height: 400px;
+  width: 100%;
+       
+  .loader {
+    position: relative;
+    top: 50%;
+    left: (50%);
+    margin-left: -16px;
+    display: none;
   }
-      
+  
   .arrow{
     position: absolute;
     height: 100%;
@@ -28,7 +31,9 @@
     background-repeat: no-repeat; 
     backgournd-position: center;
     background-size: contain;
+    display: none;
   }
+  
   #left_arrow{
     background-image: image-url('left_arrow.png');
   }
@@ -44,6 +49,10 @@
     left: 0px;
     height: 100%;
     width: 100%;*/    
+  }
+  
+  .images {
+    margin-top: 20px;
   }  
   
 }

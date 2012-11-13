@@ -23,5 +23,5 @@ window.portfolio = ->
     $(this).fadeOut(500)
   );
   
-  $('#left_arrow').click(-> impress_container.jmpress('prev'))
-  $('#right_arrow').click(-> impress_container.jmpress('next'))
+  $('#left_arrow').fadeIn('slow').click(-> impress_container.jmpress('prev'))
+  $('#right_arrow').fadeIn('slow').click(-> impress_container.jmpress('next'))

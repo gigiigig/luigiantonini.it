@@ -22,7 +22,7 @@ $(document).ready( ->
   topBar(0)
   
   #load menu elements
-  loadMenu('a.portfolio' , portfolio_fixed_at)
+  #loadMenu('a.portfolio' , portfolio_fixed_at)
   
   #load isotope links for portfolio
   works_isotope = -> 
@@ -46,14 +46,20 @@ $(document).ready( ->
   home_image_original_height = home_image.height()
     
   #test to create javascript portfolio
-  portfolio_container = $('#portfolio_container') 
-  $('.work').click(->
-    
+  $('a.portfolio').click((event) ->
+    event.preventDefault()
+    load_portfolio()       
+  )
+  
+  load_portfolio = -> 
+    portfolio_container = $('#portfolio_container') 
+
     body = $('#container')
     body.css('position' , 'relative')
     body.css('left' ,-$(window).width())
     fixedElemHider($('.section_title.fixed'),'hide')
-  
+
+    setTimeout(( -> $('.loader').fadeIn('slow')), 500)
     scrollToVal(0 , ->
       right = ($(window).width() / 2) + portfolio_container.width() / 2
       portfolio_container.css('right' , right)
@@ -63,11 +69,7 @@ $(document).ready( ->
         window.portfolio()
       )
     )
-           
-  )
-  
- 
-  
+    
   $(document).scroll( ->
     
     scroll = $(window).scrollTop()
@@ -200,12 +202,13 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop
   current_elem.data('current_fixed' , current_fixed)   
       
 fixedElemHider = (elem , operation) ->
-  switch operation
-    when "init" then elem.data('top' , elem.css('top'))
-    when "show" then elem.stop(true).animate({ 'top' : elem.data('top') } , 1000 , -> )
-    when "hide" 
-      new_top = (getFullHeight(elem) - getIntValue(elem.data('top')))      
-      elem.stop(true).animate({'top' : -new_top} , 1000 , -> )
+  if(elem != undefined)
+    switch operation
+      when "init" then elem.data('top' , elem.css('top'))
+      when "show" then elem.stop(true).animate({ 'top' : elem.data('top') } , 1000 , -> )
+      when "hide" 
+        new_top = (getFullHeight(elem) - getIntValue(elem.data('top')))      
+        elem.stop(true).animate({'top' : -new_top} , 1000 , -> )
 
 isotopize = (container , filters) ->
   for elem , filter of filters
@@ -240,14 +243,22 @@ scrollToVal = (val , callback) ->
   )  
 
 getIntValue = (property) ->
-  parseInt(property.replace('px' , ''))
+  if(property != undefined)
+    parseInt(property.replace('px' , ''))
+  else 0
 
 getMarginTop = (elem) ->
-  parseInt(elem.css('margin-top').replace('px', ''))
+  margin_top = elem.css('margin-top')
+  if(margin_top != undefined)
+    parseInt(margin_top.replace('px', ''))
+  else 
+    0
   
 getPaddingTop = (elem) ->
-  parseInt(elem.css('padding-top').replace('px', ''))
+  padding_top = elem.css('padding-top')
+  if padding_top != undefined
+    parseInt(padding_top.replace('px', ''))
+  else 
   
-
 getFullHeight = (elem) ->
   getMarginTop(elem) + getPaddingTop(elem) + elem.height()
