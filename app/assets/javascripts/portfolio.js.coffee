@@ -9,6 +9,7 @@
 window.portfolio = ->
   container = $('#portfolio_container')
   impress_container = $('#impress_container')
+  $('.step').height(window.height() - 100)
   impress_container.jmpress("route", ".basic");
   impress_container.jmpress("route", ".anilib");
   impress_container.jmpress()
@@ -25,3 +26,6 @@ window.portfolio = ->
   
   $('#left_arrow').fadeIn('slow').click(-> impress_container.jmpress('prev'))
   $('#right_arrow').fadeIn('slow').click(-> impress_container.jmpress('next'))
+  
+back_to_home = -> 
+  

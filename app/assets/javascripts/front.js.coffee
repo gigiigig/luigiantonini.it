@@ -75,7 +75,7 @@ $(document).ready( ->
         window.portfolio()
       )
     )
-    
+  
   $(document).scroll( ->
     
     scroll = $(window).scrollTop()
