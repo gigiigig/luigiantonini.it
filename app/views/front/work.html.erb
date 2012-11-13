@@ -9,9 +9,9 @@
     </div>
   </div>
   <div class="row images">
-    <% @work.pictures.each do |picture| %>
-      <%= link_to picture.image.url() do  %>
-        <%= image_tag picture.image.url(:thumb) , :class => 'span1'%>
+    <% @work.pictures.each_with_index do |picture , i| %>
+      <%= link_to picture.image.url() , :rel => "gallery#{i}" do  %>
+        <%= image_tag picture.image.url(:thumb) , :class => 'span1' %>
       <% end %>
     <% end %>
   </div>

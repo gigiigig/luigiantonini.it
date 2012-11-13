@@ -44,7 +44,7 @@
           <div class="container nav-collapse">
             <ul class="nav pull-right">
               <li>
-                <%= link_to t(:home), "/"  %>
+                <%= link_to t(:home), "/" , :class => 'home' %>
               </li>
               <li>
                 <%= link_to t(:curriculum), "https://docs.google.com/document/pub?id=1b67GGHMnwoEVXUJ2d0E8ETrz-n9PVy9zCdTcnWZdJ2Y",
@@ -63,29 +63,10 @@
     </div>
 
     <!--     <div id="white_bar"></div> -->
-    <div class="container" id="container">
-
-      <div class="row">
-        <%= # image_tag "home_image.png" , :class => "span12" , :style => "margin-top: -20px" , :id => "banner" 
-        %>
-        <div id="home_image" class="span12"></div>
-        
-      </div>
-
-      <div class="content">
-        <div class="row">
-          <div class="span12">
-            <%= yield  %>
-          </div>
-        </div><!--/row-->
-      </div><!--/content-->
-
+    <div id="container">
+      <%= yield  %>
     </div>
     <!-- /container -->
-    
-    <div id="portfolio_container">
-      <%= image_tag 'loader.gif' , :class => "loader" %>
-    </div>
 
     <footer>
       <div class="container">

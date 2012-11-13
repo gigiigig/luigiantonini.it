@@ -1,8 +1,14 @@
 class FrontController < ApplicationController
   def index
+    
     @technologies = Technology.all(:order => "rand()" )
     @works = Work.all
     @contact = Contact.new
+    
+    if params[:layout] == 'false'
+      render :layout => false
+    end
+    
   end
 
   def curriculum

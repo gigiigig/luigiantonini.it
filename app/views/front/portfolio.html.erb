@@ -1,12 +1,16 @@
-<div id="impress_container" >
+<div id="portfolio_container">
+  <%= image_tag 'loader.gif' , :class => "loader" %>
 
-  
+  <div id="impress_container" >
+
     <% @works.each_with_index do |work , i| %>
     <div class="step" id="portfolio/<%= work.name %>" data-z="<%= -(i * 1000)%>" data-src="portfolio?id=<%= work.id %>">
       <%= image_tag 'loader.gif' , :class => "loader" %>
     </div>
     <% end %>
-  
+
+  </div>
+  <div id="left_arrow" class="arrow"></div>
+  <div id="right_arrow" class="arrow"></div>
+
 </div>
-<div id="left_arrow" class="arrow"></div>
-<div id="right_arrow" class="arrow"></div>

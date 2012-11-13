@@ -63,7 +63,7 @@ gem 'paperclip'
 
 platforms :ruby do
   gem 'twitter-bootstrap-rails' 
-  gem 'fancybox-rails' 
+  gem 'fancybox2-rails'
 end
 
 gem 'bluecloth'

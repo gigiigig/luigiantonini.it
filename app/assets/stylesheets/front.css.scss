@@ -13,27 +13,29 @@ $link-color: #999;
 body{
 }
 
-#container {
-  overflow: hidden;
-  @include transition(left 2s);
-
-  #home_image {
-    background-image: image-url('home_image.png');
-    background-position: center 40px;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    height: 372px;
        
-    &.with_shadow{
-       @include box-shadow(#666 0 -5px 10px -8px inset);    
-    }
-    
-    @include transition(box-shadow 2s);
-
-  }
-  
+.loader {
+  position: absolute;
+  top: 50%;
+  left: (50%);
+  margin-left: -16px;
+  display: none;
 }
 
+#home_image {
+  background-image: image-url('home_image.png');
+  background-position: center 40px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 372px;
+     
+  &.with_shadow{
+     @include box-shadow(#666 0 -5px 10px -8px inset);    
+  }
+  
+  @include transition(box-shadow 2s);
+
+}
 
 .menu{
     

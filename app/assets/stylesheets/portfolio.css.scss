@@ -8,19 +8,11 @@
   
   @include transition(right 2s);
   
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-       
-  .loader {
-    position: relative;
-    top: 50%;
-    left: (50%);
-    margin-left: -16px;
-    display: none;
-  }
+  // position: absolute;
+  // top: 0px;
+  // left: 0px;
+  // height: 100%;
+  // width: 100%;
   
   .arrow{
     position: absolute;

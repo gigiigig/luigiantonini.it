@@ -2,7 +2,16 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+
 $(document).ready( ->
+  $('#container').css('min-height' , $(window).height())
+  window.load_home()
+)
+
+window.load_home = ->
+  
+  #reset other styles
+  $('body').removeAttr('style')
   
   #load home message function
   home_message = $("#home_message")
@@ -48,32 +57,30 @@ $(document).ready( ->
   #test to create javascript portfolio
   $('a.portfolio').click((event) ->
     event.preventDefault()
-    load_portfolio()       
+    home_to_portfolio()       
   )
   
   $('.work').click(->
     work_id = $(this).data('work-id')
     window.location.hash = work_id
-    load_portfolio()    
+    home_to_portfolio()    
   )
   
-  load_portfolio = -> 
-    portfolio_container = $('#portfolio_container') 
+  home_to_portfolio = -> 
 
-    body = $('#container')
-    body.css('position' , 'relative')
-    body.css('left' ,-$(window).width())
+    index_container = $('#index_container')
+    index_container.css('position' , 'relative')
     fixedElemHider($('.section_title.fixed'),'hide')
+    $('.loader').fadeIn('slow')
 
-    setTimeout(( -> $('.loader').fadeIn('slow')), 500)
-    scrollToVal(0 , ->
-      right = ($(window).width() / 2) + portfolio_container.width() / 2
-      portfolio_container.css('right' , right)
-      
-      $.get('portfolio' , (data) -> 
-        portfolio_container.html(data)
-        window.portfolio()
-      )
+    index_container.animate({
+        marginLeft: -$(window).width()
+      },2000, ->
+        $('html,body').scrollTop()
+        $.get('portfolio' , (data) ->
+          $('#container').html(data)
+          window.portfolio()
+        ) 
     )
   
   $(document).scroll( ->
@@ -84,8 +91,8 @@ $(document).ready( ->
     topBar(scroll)
     
     #home image 
-    # if(scroll < home_message_fixed_at)
-      # homeImage(scroll ,home_image_original_height , home_image)
+    #if(scroll < home_message_fixed_at)
+    homeImage(scroll ,home_image_original_height , home_image)
     
     fixableElement(scroll , home_message , technologies , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) ) 
     fixableElement(scroll , portfolio , works )
@@ -100,7 +107,6 @@ $(document).ready( ->
   
   $('a.fancybox').fancybox()
 
-)
 
 homeImage = (scroll , original_height  ,container) ->
     
