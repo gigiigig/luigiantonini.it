@@ -51,6 +51,12 @@ $(document).ready( ->
     load_portfolio()       
   )
   
+  $('.work').click(->
+    work_id = $(this).data('work-id')
+    window.location.hash = work_id
+    load_portfolio()    
+  )
+  
   load_portfolio = -> 
     portfolio_container = $('#portfolio_container') 
 
@@ -78,11 +84,11 @@ $(document).ready( ->
     topBar(scroll)
     
     #home image 
-    if(scroll < home_message_fixed_at)
-      homeImage(scroll ,home_image_original_height , home_image)
+    # if(scroll < home_message_fixed_at)
+      # homeImage(scroll ,home_image_original_height , home_image)
     
-    fixableElement(scroll , home_message , technologies , home_message_fixed_at ,1100 , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) ) 
-    fixableElement(scroll , portfolio , works , portfolio_fixed_at ,portfolio_hidden_at)
+    fixableElement(scroll , home_message , technologies , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) ) 
+    fixableElement(scroll , portfolio , works )
     
     #$('.section_title').each(->
     #  elem = $(this)
@@ -144,12 +150,22 @@ loadMenuElem = (elem, scroll_value) ->
     scrollToVal(scroll_value))
   
 
-fixableElement = (scroll , current_elem , bottom_elem , fixed_start , fixed_stop , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
+fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
 
   current_elem_name = current_elem.attr('id')
   current_hidden = current_elem.data('current_hidden')
   current_fixed = current_elem.data('current_fixed')
-  
+
+  #calculate start and stop
+  if(!current_hidden && !current_fixed)  
+    fixed_start = current_elem.offset().top
+    fixed_stop = bottom_elem.offset().top + bottom_elem.height()
+    current_elem.data('fixed_start',fixed_start)
+    current_elem.data('fixed_stop',fixed_stop)
+  else
+    fixed_start = current_elem.data('fixed_start')
+    fixed_stop = current_elem.data('fixed_stop') 
+    
   #console.log("current_elem : #{current_elem_name}" )
   #console.log("current_hidden : #{current_hidden}" )
   #console.log("current_fixed : #{current_fixed}" )

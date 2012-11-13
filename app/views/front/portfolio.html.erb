@@ -1,16 +1,9 @@
 <div id="impress_container" >
 
   
-    <% 3.times.each do |i| %>
-    <% work = @works[i] %>
-    <div class="step" id="<%= work.name %>" data-z="<%= -(i * 1000)%>" data-src="portfolio?id=<%= work.id %>">
-      <!-- <div class="">
-      <%= image_tag work.cover.url(:thumb) %>
-      </div>
-      <div class="">
-      <%= work.name %>
-      <%= work.description %>
-      </div> -->
+    <% @works.each_with_index do |work , i| %>
+    <div class="step" id="/portfolio/<%= work.name %>" data-z="<%= -(i * 1000)%>" data-src="portfolio?id=<%= work.id %>">
+      <%= image_tag 'loader.gif' , :class => "loader" %>
     </div>
     <% end %>
   

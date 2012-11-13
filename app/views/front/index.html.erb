@@ -48,7 +48,7 @@
 
 <div class="row" id="works">
   <% @works.each do |t| %>
-  <div class="work span4 <%= t.category.downcase %>">
+  <div class="work span4 <%= t.category.downcase %>" data-work-id="/portfolio/<%= t.name %>">
     <div class="work_image" style="background-image: url(<%= t.cover.url(:thumb) %>);" ></div>
     <h3> <%= t.name %> </h3>
   </div>
