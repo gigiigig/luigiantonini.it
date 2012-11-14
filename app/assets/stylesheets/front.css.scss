@@ -148,16 +148,19 @@ h2{
 }
 
 .section_title {
+  
+  $margin-top : 200px;
+  
   @include transition(box-shadow 2s);
   @include transition(left 2s);
 
-  margin-top: 80px;
+  margin-top: $margin-top;
   border-bottom: 1px solid $borders-color;
   
    &.fixed {
      z-index: 1000;
     position: fixed;
-    top: -80px;
+    top: -$margin-top;
     background-image: image-url('background.png');
     @include box-shadow($shadows-color 0 4px 10px -8px);
   }

@@ -4,18 +4,20 @@
       <%= image_tag @work.cover.url(:thumb) %>
     </div>
     <div class="span8">
-      <%= @work.name %>
-      <%= @work.description %>
+      <h2><%= @work.name %></h2>
+      <%= BlueCloth.new(@work.description).to_html().html_safe() %>
     </div>
   </div>
   <div class="row images">
     <% @work.pictures.each_with_index do |picture , i| %>
-      <%= link_to picture.image.url() , :rel => "gallery#{i}" do  %>
+      <%= link_to picture.image.url() , :rel => "gallery#{@work.id}" do  %>
         <%= image_tag picture.image.url(:thumb) , :class => 'span1' %>
       <% end %>
     <% end %>
   </div>
   <script type="textt/javascript">
-    $('.images a').fancybox();
+    $('.images a').fancybox({
+      padding: 0
+    });
   </script>
 </div>

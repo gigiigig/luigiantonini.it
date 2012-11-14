@@ -19,4 +19,6 @@
 /public/assets/
 
 #vendor
-/vendor/cache/
+/vendor/cache
+
+.DS_Store/

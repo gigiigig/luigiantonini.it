@@ -17,6 +17,6 @@
 //= require jquery.isotope.min
 //= require fancybox
 //= require impress
-//= require portfolio
+//= require front
 //= require_tree . 
 
