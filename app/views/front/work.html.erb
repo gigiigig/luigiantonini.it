@@ -1,23 +1,30 @@
 <div class="container">
+  <div class="row" sty>
+    <h2 class="span10 offset1"><%= @work.name %></h2>
+  </div>
   <div class="row">
-    <div class="span4">
-      <%= image_tag @work.cover.url(:thumb) %>
+    <div class="span5 offset1">
+      <%= image_tag @work.cover.url(:preview) %>
     </div>
-    <div class="span8">
-      <h2><%= @work.name %></h2>
+    <div class="span5">
+      
       <%= BlueCloth.new(@work.description).to_html().html_safe() %>
     </div>
   </div>
   <div class="row images">
-    <% @work.pictures.each_with_index do |picture , i| %>
-      <%= link_to picture.image.url() , :rel => "gallery#{@work.id}" do  %>
+    <div class="span10 offset1">
+      <div class="row">
+        <% @work.pictures.each_with_index do |picture , i| %>
+        <%= link_to picture.image.url() , :rel => "gallery#{@work.id}" do  %>
         <%= image_tag picture.image.url(:thumb) , :class => 'span1' %>
-      <% end %>
-    <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
   <script type="textt/javascript">
-    $('.images a').fancybox({
-      padding: 0
-    });
+		$('.images a').fancybox({
+			padding : 0
+		});
   </script>
 </div>

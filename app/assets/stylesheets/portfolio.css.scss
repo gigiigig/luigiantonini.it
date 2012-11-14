@@ -4,6 +4,8 @@
 @import "compass/css3/appearance";
 @import "compass/css3/transition";
 
+$borders-color : #cdcdcd;
+
 #portfolio_container {
   
   @include transition(right 2s);
@@ -41,6 +43,11 @@
     left: 0px;
     height: 100%;
     width: 100%;*/    
+  }
+  
+  h2{
+    border-bottom: 1px solid $borders-color;
+    margin-bottom: 30px;
   }
   
   .images {

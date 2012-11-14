@@ -1,14 +1,14 @@
 class FrontController < ApplicationController
   def index
-    
+
     @technologies = Technology.all(:order => "rand()" )
-    @works = Work.all
+    @works = ordered_works
     @contact = Contact.new
-    
+
     if params[:layout] == 'false'
       render :layout => false
     end
-    
+
   end
 
   def curriculum
@@ -34,9 +34,13 @@ class FrontController < ApplicationController
       @work = Work.find params[:id]
       render :action => 'work' , :layout => false
     else
-      @works = Work.all
+      @works = ordered_works
       render :layout => false
     end
+  end
+
+  def ordered_works
+    Work.all(:order => 'date DESC')
   end
 
 end

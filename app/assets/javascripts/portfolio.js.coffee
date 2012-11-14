@@ -15,14 +15,14 @@ window.portfolio = ->
   impress_container.jmpress("route", ".anilib");
   impress_container.jmpress()
   #impress_container.afterInit( -> 
-  $('.step').fadeOut()
-  $('.step.active').fadeIn()
+  $('.step').hide()
+  $('.step.active').fadeIn(500)
   #)
   
   $('.step').on('enterStep', (event) -> 
     $(this).fadeIn(500)
   ).on('leaveStep', (event) ->
-    $(this).fadeOut(500)
+    $(this).fadeOut(1000)
   );
   
   $('#left_arrow').fadeIn('slow').click(-> impress_container.jmpress('prev'))
