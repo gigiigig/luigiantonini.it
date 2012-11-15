@@ -83,5 +83,16 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
 
+    <% if(Rails.env.development?) %>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).scroll(function() {
+                var scroll = $(window).scrollTop();
+                $('.brand').html(scroll);
+            });
+        });
+    </script>
+    <% end %>
+
   </body>
 </html>

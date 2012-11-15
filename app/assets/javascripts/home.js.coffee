@@ -154,8 +154,7 @@ topBar = (scroll) ->
   top_bar.css("padding-top" , padding)
   brand.css("font-size" , font_size)
   brand.css("padding-top" , 8 + padding / 4)
-  brand.html(scroll)
-  
+
 loadMenu = (elem , scroll)->
   loadMenuElem(elem,scroll)
     
