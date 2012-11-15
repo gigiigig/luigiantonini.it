@@ -6,8 +6,7 @@
     <div class="span5 offset1">
       <%= image_tag @work.cover.url(:preview) %>
     </div>
-    <div class="span5">
-      
+    <div class="span5 target">
       <%= BlueCloth.new(@work.description).to_html().html_safe() %>
     </div>
   </div>
@@ -26,5 +25,6 @@
 		$('.images a').fancybox({
 			padding : 0
 		});
+		$('.target a').attr('target','_blank');
   </script>
 </div>

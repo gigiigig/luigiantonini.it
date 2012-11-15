@@ -32,12 +32,25 @@ window.load_home = ->
   #load isotope links for portfolio
   works_isotope = -> 
     filters = '#portfolio_all': '*' , '#portfolio_web' : '.web' , '#portfolio_mobile' : '.mobile'
-    isotopize('#works' , filters)
+    isotopize('#works' , filters , '*')
   
   #load isotope links for works
   technologies_isotope = ->
-    filters = '#technologies_all': '*' , '#technologies_language' : '.language' , '#technologies_framework' : '.framework' 
-    isotopize('#technologies' , filters)
+    #add random class to worhw wich i want to show
+    num_rows = if $(window).height() > 800 then 3 else 2   
+    elems_to_show = 3 * num_rows
+    
+    $('#technologies').css('min-height' , (num_rows * $('.technology').height() + 160) + "px");
+    
+    if($('.technology').size < elems_to_show) 
+      elems_to_show = $('.technology').size
+       
+    for index in [0..elems_to_show - 1]
+      console.debug(index)
+      $('.technology').eq(index).addClass('random')
+      
+    filters = '#technologies_all': '.random' , '#technologies_language' : '.language' , '#technologies_framework' : '.framework' 
+    isotopize('#technologies' , filters , '.random')
       
   #load isotope     
   technologies_isotope()
@@ -66,7 +79,7 @@ window.load_home = ->
 
     index_container = $('#index_container')
     index_container.css('position' , 'relative')
-    fixedElemHider($('.section_title.fixed'),'hide')
+    fixedElemHider($('.fixed'),'hide')
     $('.loader').fadeIn('slow')
 
     index_container.animate({
@@ -229,18 +242,21 @@ fixedElemHider = (elem , operation) ->
         new_top = (getFullHeight(elem) - getIntValue(elem.data('top')))      
         elem.stop(true).animate({'top' : -new_top} , 1000 , -> )
 
-isotopize = (container , filters) ->
+isotopize = (container , filters , start_filter) ->
   for elem , filter of filters
     isotopeLink(container ,elem , filter) 
   container = $(container)  
   if container.width() != container.data('width')
     container.data('width', container.width()) 
-    $(container).isotope()
+    $(container).isotope({
+      layoutMode : 'fitRows',
+      sortBy : 'random',
+      filter: start_filter
+    })
 
 isotopeLink = (container, link ,filter = '*') ->
   $(link).click( -> 
     $(container).isotope({
-      itemSelector : '.work',
       layoutMode : 'fitRows',
       sortBy : 'random', 
       filter: filter
