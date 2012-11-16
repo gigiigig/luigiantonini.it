@@ -48,13 +48,17 @@
         </div>
 
         <div class="row section_title" id="portfolio">
-          <h2 class="span6">Portfolio</h2>
-          <div class="span6 menu">
-            <a href="" id="portfolio_all">All</a>
-            <span>/</span>
-            <a href="" id="portfolio_mobile">Mobile</a>
-            <span>/</span>
-            <a href="" id="portfolio_web">Web</a>
+          <div class="span12 bordered">
+            <div class="row">
+              <h2 class="span6">Portfolio</h2>
+              <div class="span6 menu">
+                <a href="" id="portfolio_all">All</a>
+                <span>/</span>
+                <a href="" id="portfolio_mobile">Mobile</a>
+                <span>/</span>
+                <a href="" id="portfolio_web">Web</a>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -67,21 +71,37 @@
             <h3> <%= t.name %> </h3>
           </div>
           <% end %>
+
         </div>
 
         <div class="row section_title" id="contact">
-          <h2 class="span6"><%= t :contact %></h2>
+          <div class="span12 bordered">
+            <div class="row">
+              <h2 class="span6"><%= t :contact %></h2>
+            </div>
+          </div>
         </div>
-
+        
+        <% if Rails.env.development? %>
         <div class="row">
-          <%= semantic_form_for :contact , :html => { :class => "span8" } do |f| %>
+          <div class="span8">
+            <form>
+              <fieldset>
+                <label><%= t :first_name%></label>
+                <input type="text" placeholder="Insert your <%= :first_name %>">
 
-          <%= f.input :name %>
-          <%= f.input :last_name %>
-          <%= f.input :email %>
+                <label><%= t :last_name%></label>
+                <input type="text" placeholder="Insert your <%= :last_name %>">
 
-          <%= f.action :submit, :as => :button %>
+                <label><%= t :email%></label>
+                <input type="text" placeholder="Insert your <%= :email %>">
 
+                <button type="submit" class="btn">
+                  <%= t :submit%>
+                </button>
+              </fieldset>
+            </form>
+          </div>
           <% end %>
         </div>
 

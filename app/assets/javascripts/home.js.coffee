@@ -40,17 +40,23 @@ window.load_home = ->
     num_rows = if $(window).height() > 800 then 3 else 2   
     elems_to_show = 3 * num_rows
     
-    $('#technologies').css('min-height' , (num_rows * $('.technology').height() + 160) + "px");
+    num_rows = ($('.technology').size() / 3)
+    console.debug("tehnologies num rows : #{num_rows}")
+    min_height = (num_rows * $('.technology').height() + 160) + "px"
     
-    if($('.technology').size < elems_to_show) 
-      elems_to_show = $('.technology').size
+    console.debug("tehnologies min height : #{min_height}")
+    
+    $('#technologies').css('min-height' , min_height );
+    
+    # if($('.technology').size < elems_to_show) 
+    # elems_to_show = $('.technology').size
        
-    for index in [0..elems_to_show - 1]
-      console.debug(index)
-      $('.technology').eq(index).addClass('random')
+    # for index in [0..elems_to_show - 1]
+    # console.debug(index)
+    # $('.technology').eq(index).addClass('random')
       
-    filters = '#technologies_all': '.random' , '#technologies_language' : '.language' , '#technologies_framework' : '.framework' 
-    isotopize('#technologies' , filters , '.random')
+    filters = '#technologies_all': '*' , '#technologies_language' : '.language' , '#technologies_framework' : '.framework' 
+    isotopize('#technologies' , filters , '*')
       
   #load isotope     
   technologies_isotope()
@@ -94,28 +100,39 @@ window.load_home = ->
   
   $(document).scroll( ->
     
-    scroll = $(window).scrollTop()
-    
+   
     #start top bar animation
-    topBar(scroll)
+    topBar(scroll())
     
     #home image 
-    #if(scroll < home_message_fixed_at)
-    homeImage(scroll ,home_image_original_height , home_image)
+    #if(scroll() < home_message_fixed_at)
+    homeImage(scroll() ,home_image_original_height , home_image)
     
-    fixableElement(scroll , home_message , technologies , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) ) 
-    fixableElement(scroll , portfolio , works )
+    fixableElement(scroll() , home_message , technologies , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) ) 
+    fixableElement(scroll() , portfolio , works )
     
     #$('.section_title').each(->
     #  elem = $(this)
     #  next = elem.next()
-    #  fixableElement(scroll , elem , next , elem.offset().top , next.offset().top + next.height())
+    #  fixableElement(scroll() , elem , next , elem.offset().top , next.offset().top + next.height())
     #)
+    
+    scrollNavigation()
     
   )
   
   $('a.fancybox').fancybox()
 
+scroll = -> $(window).scrollTop()
+    
+old_scroll = 0
+scrollDir = ->
+  to_return = true
+  if(scroll() < old_scroll)
+    to_return = false
+  old_scroll = scroll()
+  to_return
+  
 
 homeImage = (scroll , original_height  ,container) ->
     
@@ -163,6 +180,17 @@ loadMenuElem = (elem, scroll_value) ->
     e.preventDefault() 
     scrollToVal(scroll_value))
   
+scrollNavigation = ->
+   
+  console.debug "start at : " + (fixedElemStopAt('#technologies') - $(window).height())
+   
+  if !$('body').is(':animated') && !$('html').is(':animated')
+    if(scrollDir()) #scroll() > 25 &&
+      if( scroll() < fixedElemStartAt('#home_message') - 100)
+        scrollToElem('#home_message')  
+      else if(scroll() > (fixedElemStopAt('#technologies') - $(window).height() + 100) && scroll() < fixedElemStartAt('#portfolio') - 100)
+        scrollToElem('#portfolio')
+
 
 fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
 
@@ -172,8 +200,8 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , 
 
   #calculate start and stop
   if(!current_hidden && !current_fixed)  
-    fixed_start = current_elem.offset().top
-    fixed_stop = bottom_elem.offset().top + bottom_elem.height() - 100 
+    fixed_start = fixedElemStartAt current_elem
+    fixed_stop = fixedElemStopAt bottom_elem
     # remove 100 for hide element during current element scroll and not after 
     current_elem.data('fixed_start',fixed_start)
     current_elem.data('fixed_stop',fixed_stop)
@@ -231,7 +259,14 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , 
       
   current_elem.data('current_hidden' , current_hidden)
   current_elem.data('current_fixed' , current_fixed)   
-      
+
+
+fixedElemStartAt =(elem) -> 
+  $(elem).offset().top 
+
+fixedElemStopAt =(elem) -> 
+  $(elem).offset().top + $(elem).height() - 100 
+
 fixedElemHider = (elem , operation) ->
   if(elem != undefined)
     switch operation
@@ -263,18 +298,22 @@ isotopeLink = (container, link ,filter = '*') ->
     return false
   )
 
-scrollTo = (id) ->
-  $('html,body').animate(
-    {scrollTop: $("##{id}").offset().top} , 3000, 'easeInOutExpo'
-  )
-  
+# scrollTo = (id) ->
+  # $('html,body').animate(
+    # {scrollTop: $("##{id}").offset().top} , 3000, 'easeInOutExpo'
+  # )
+#   
 elemPosition = (elem) ->
-  $("#{elem}").offset().top
+  $(elem).offset().top
   
 scrollToVal = (val , callback) ->
   $('html,body').animate(
-    {scrollTop: val} , 3000, 'easeInOutCubic' , -> callback() 
+    {scrollTop: val} , 1500, 'easeInOutCubic' , -> if(callback) then callback() 
   )  
+  
+scrollToElem = (elem , callback) ->
+  console.log "scroll to : #{elem} at : " + $(elem).scrollTop()
+  scrollToVal(elemPosition(elem) + 20 , callback)
 
 getIntValue = (property) ->
   if(property != undefined)
