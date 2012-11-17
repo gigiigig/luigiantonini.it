@@ -181,15 +181,20 @@ loadMenuElem = (elem, scroll_value) ->
     scrollToVal(scroll_value))
   
 scrollNavigation = ->
-   
-  console.debug "start at : " + (fixedElemStopAt('#technologies') - $(window).height())
+
+  greatherThen =  (elem) ->
+    value = fixedElemStopAt(elem) - $(window).height() + 100
+  
+  console.debug "window height : " + $(window).height()
+  console.debug "stop at : " + (fixedElemStopAt('#technologies'))
+  console.debug "scroll at : " + greatherThen('#technologies')
    
   if !$('body').is(':animated') && !$('html').is(':animated')
     if(scrollDir()) #scroll() > 25 &&
       if( scroll() < fixedElemStartAt('#home_message') - 100)
         scrollToElem('#home_message')  
-      else if(scroll() > (fixedElemStopAt('#technologies') - $(window).height() + 100) && scroll() < fixedElemStartAt('#portfolio') - 100)
-        scrollToElem('#portfolio')
+      else if(scroll() > greatherThen('#technologies') && scroll() < fixedElemStartAt('#portfolio') - 100)
+        scrollToElem('#portfolio' , -> $('body,html').stop())
 
 
 fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
