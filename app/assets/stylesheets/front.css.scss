@@ -18,11 +18,6 @@ body{
 #browser_message , #show_browser_message {
   display: none;
 }
-
-.stop-scrolling {
-  height: 100%;
-  overflow: hidden;
-}
        
 .loader {
   position: fixed;
@@ -30,6 +25,14 @@ body{
   left: (50%);
   margin-left: -16px;
   display: none;
+}
+
+a.brand{
+  font-size: 36px;
+  padding-top: 13px;
+}
+.navbar-inner ul.nav{
+  padding-top: 20px;
 }
 
 #home_image {
