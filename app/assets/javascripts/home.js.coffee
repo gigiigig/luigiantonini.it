@@ -92,7 +92,7 @@ window.load_home = ->
     index_container.animate({
         marginLeft: -$(window).width()
       },2000, ->
-        $('html,body').scrollTop()
+        $('html,body').scrollTop(0)
         $.get('portfolio' , (data) ->
           $('#container').html(data)
           window.portfolio(start.replace(new RegExp(' ', 'g') , '-'))
@@ -102,11 +102,6 @@ window.load_home = ->
   #prevent mouse scroll during animation
   $(document).on('mousewheel' , (e, aS, aQ, deltaY) ->
     
-    console.debug "mousewheel e : #{e}"
-    console.debug "mousewheel aS : #{aS}"
-    console.debug "mousewheel aQ : #{aQ}"
-    console.debug "mousewheel deltay : #{deltaY}" 
-      
     if $('body').is(':animated') || $('html').is(':animated')   
       e.preventDefault() 
         
