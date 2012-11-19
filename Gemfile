@@ -32,6 +32,7 @@ group :assets do
 
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
+  gem 'modernizr-rails'
 
 end
 

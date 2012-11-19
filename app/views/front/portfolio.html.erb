@@ -4,7 +4,7 @@
   <div id="impress_container" >
 
     <% @works.each_with_index do |work , i| %>
-    <div class="step" id="portfolio/<%= work.name %>" data-z="<%= -(i * 1000)%>" data-src="portfolio?id=<%= work.id %>">
+    <div class="step" id="portfolio/<%= work.name.gsub " " , "-" %>" data-z="<%= -(i * 1000)%>" data-src="portfolio?id=<%= work.id %>">
       <%= image_tag 'loader.gif' , :class => "loader" %>
     </div>
     <% end %>

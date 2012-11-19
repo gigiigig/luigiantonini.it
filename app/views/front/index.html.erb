@@ -64,7 +64,7 @@
 
         <div class="row" id="works">
           <% @works.each do |t| %>
-          <div class="work span4 <%= t.category.downcase %>" data-work-id="/portfolio/<%= t.name %>">
+          <div class="work span4 <%= t.category.downcase %>" data-work-id="portfolio/<%= t.name %>">
             <div class="work_image"  >
               <div style="background-image: url(<%= t.cover.url(:thumb) %>);"></div>
             </div>
@@ -73,6 +73,8 @@
           <% end %>
 
         </div>
+        
+       
 
         <% if Rails.env.development? %>
         <div class="row section_title" id="contact">

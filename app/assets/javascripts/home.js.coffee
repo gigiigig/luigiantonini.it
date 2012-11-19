@@ -61,6 +61,7 @@ window.load_home = ->
   #load isotope     
   technologies_isotope()
   works_isotope()
+  
   $(window).resize( ->
    technologies_isotope()
    works_isotope()  
@@ -77,11 +78,11 @@ window.load_home = ->
   
   $('.work').click(->
     work_id = $(this).data('work-id')
-    window.location.hash = work_id
-    home_to_portfolio()    
+    #window.location.hash = work_id
+    home_to_portfolio("#" + work_id)    
   )
   
-  home_to_portfolio = -> 
+  home_to_portfolio = (start = null) -> 
 
     index_container = $('#index_container')
     index_container.css('position' , 'relative')
@@ -94,7 +95,7 @@ window.load_home = ->
         $('html,body').scrollTop()
         $.get('portfolio' , (data) ->
           $('#container').html(data)
-          window.portfolio()
+          window.portfolio(start.replace(new RegExp(' ', 'g') , '-'))
         ) 
     )
   
@@ -140,6 +141,7 @@ window.load_home = ->
   )
   
   $('a.fancybox').fancybox()
+  $('#show_browser_message').trigger('click')
 
 scroll = -> $(window).scrollTop()
     

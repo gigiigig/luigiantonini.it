@@ -18,5 +18,6 @@
 //= require fancybox
 //= require impress
 //= require front
+//= require modernizr
 //= require_tree . 
 

@@ -15,6 +15,10 @@ body{
   
 }
 
+#browser_message , #show_browser_message {
+  display: none;
+}
+
 .stop-scrolling {
   height: 100%;
   overflow: hidden;

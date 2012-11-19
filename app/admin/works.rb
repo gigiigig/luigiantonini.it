@@ -10,6 +10,7 @@ ActiveAdmin.register Work  do
     f.inputs do
       f.input :name
       f.input :description
+      f.input :link
       f.input :date
       f.input :category , :as => :select , :collection => ["Web" , "Mobile" , "Application"]
       f.input :cover, :as => :file, :hint => if(f.object.cover.exists?) then f.template.image_tag(f.object.cover.url(:thumb)) end
@@ -31,6 +32,7 @@ ActiveAdmin.register Work  do
 
     column :name
     column :description
+    column :link
     column :date
 
     column "Cover" do |work|
@@ -49,6 +51,7 @@ ActiveAdmin.register Work  do
     attributes_table do
       row :name
       row :description
+      row :link
       row :cover do |work|
         if(work.cover.exists?) then image_tag work.cover.url(:thumb) end
       end

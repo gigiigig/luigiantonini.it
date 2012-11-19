@@ -6,14 +6,23 @@
   # window.portfolio()
 # )
 
-window.portfolio = ->
+window.portfolio = (start = null) ->
  
+  console.debug "load portfolio"
+  
   container = $('#portfolio_container')
   impress_container = $('#impress_container')
   # $('.step').height(window.height() - 100)
   impress_container.jmpress("route", ".basic");
   impress_container.jmpress("route", ".anilib");
-  impress_container.jmpress()
+  
+  options = {
+              start: "ciao"
+            }
+            
+  console.log "options : " + options       
+  
+  impress_container.jmpress(options)
   #impress_container.afterInit( -> 
   $('.step').hide()
   $('.step.active').fadeIn(500)
