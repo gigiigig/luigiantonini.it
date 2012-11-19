@@ -5,7 +5,7 @@
 window.load_home = ->
   
   window.hash('/home')
-  
+
   #reset styles addeds from jmpress
   $('body,html').removeAttr('style')
     
@@ -98,13 +98,24 @@ window.load_home = ->
         ) 
     )
   
+  #prevent mouse scroll during animation
+  $(document).on('mousewheel' , (e, aS, aQ, deltaY) ->
+    
+    console.debug "mousewheel e : #{e}"
+    console.debug "mousewheel aS : #{aS}"
+    console.debug "mousewheel aQ : #{aQ}"
+    console.debug "mousewheel deltay : #{deltaY}" 
+      
+    if $('body').is(':animated') || $('html').is(':animated')   
+      e.preventDefault() 
+        
+  )
+  
   $(document).scroll((event) ->
     
     #if html and body are animated , prevent default scroll
     #to avoid stuttering
-    if $('body').is(':animated') || $('html').is(':animated')   
-      event.preventDefault()
-      
+        
     console.debug "body is animated : " + $('body').is(':animated')
     console.debug "html is animated : " + $('html').is(':animated')  
    
@@ -186,6 +197,9 @@ loadMenuElem = (elem, scroll_value) ->
   $(elem).click((e) ->
     e.preventDefault() 
     scrollToVal(scroll_value))
+
+preventScroll = ->
+  $(window).scrollTop($('body').scrollTop())
   
 scrollNavigation = ->
 
@@ -197,13 +211,12 @@ scrollNavigation = ->
   console.debug "scroll at : " + greatherThen('#technologies')
    
   if !$('body').is(':animated') && !$('html').is(':animated')
-    if(scrollDir()) #scroll() > 25 &&
+    if(scrollDir())
       # control if scroll() > 0 is needed on macos safari becouse of smoth effect 
       if(scroll() > 0 && scroll() < fixedElemStartAt('#home_message') - 100 )
-        $('body').addClass('stop-scrolling')
         scrollToElem('#home_message')  
       else if(scroll() > greatherThen('#technologies') && scroll() < fixedElemStartAt('#portfolio') - 100)
-        scrollToElem('#portfolio' , -> $('body,html').stop())
+        scrollToElem('#portfolio')
 
 
 fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
@@ -322,7 +335,7 @@ elemPosition = (elem) ->
   
 scrollToVal = (val , callback) ->
   $('html,body').animate(
-    {scrollTop: val} , 1500, 'easeInOutCubic' , -> if(callback) then callback() 
+    {scrollTop: val} , 2000, 'easeInOutCubic' , -> if(callback) then callback() 
   )  
   
 scrollToElem = (elem , callback) ->

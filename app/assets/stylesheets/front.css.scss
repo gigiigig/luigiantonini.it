@@ -125,7 +125,7 @@ body{
     position: fixed;
     top: -30px;
     background-image: image-url('background.png');
-    @include box-shadow($shadows-color 0 4px 10px -8px);
+    //@include box-shadow($shadows-color 0 4px 10px -8px);
     
     .menu {
       @include opacity(1);
@@ -171,7 +171,7 @@ h2{
     position: fixed;
     top: -$margin-top;
     background-image: image-url('background.png');
-    @include box-shadow($shadows-color 0 4px 10px -8px);
+    //@include box-shadow($shadows-color 0 4px 10px -8px);
   }
   
 }
