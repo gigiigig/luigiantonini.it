@@ -17,7 +17,7 @@ window.portfolio = (start = null) ->
   impress_container.jmpress("route", ".anilib");
   
   options = {
-              start: "ciao"
+              start: start
             }
             
   console.log "options : " + options       

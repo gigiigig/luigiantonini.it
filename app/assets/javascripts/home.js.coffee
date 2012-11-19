@@ -95,7 +95,7 @@ window.load_home = ->
         $('html,body').scrollTop(0)
         $.get('portfolio' , (data) ->
           $('#container').html(data)
-          window.portfolio(start.replace(new RegExp(' ', 'g') , '-'))
+          window.portfolio(start)
         ) 
     )
   
@@ -136,7 +136,7 @@ window.load_home = ->
   )
   
   $('a.fancybox').fancybox()
-  $('#show_browser_message').trigger('click')
+  #$('#show_browser_message').trigger('click')
 
 scroll = -> $(window).scrollTop()
     
