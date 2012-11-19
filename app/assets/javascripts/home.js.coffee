@@ -98,8 +98,15 @@ window.load_home = ->
         ) 
     )
   
-  $(document).scroll( ->
+  $(document).scroll((event) ->
     
+    #if html and body are animated , prevent default scroll
+    #to avoid stuttering
+    if $('body').is(':animated') || $('html').is(':animated')   
+      event.preventDefault()
+      
+    console.debug "body is animated : " + $('body').is(':animated')
+    console.debug "html is animated : " + $('html').is(':animated')  
    
     #start top bar animation
     topBar(scroll())
@@ -191,7 +198,9 @@ scrollNavigation = ->
    
   if !$('body').is(':animated') && !$('html').is(':animated')
     if(scrollDir()) #scroll() > 25 &&
-      if( scroll() < fixedElemStartAt('#home_message') - 100)
+      # control if scroll() > 0 is needed on macos safari becouse of smoth effect 
+      if(scroll() > 0 && scroll() < fixedElemStartAt('#home_message') - 100 )
+        $('body').addClass('stop-scrolling')
         scrollToElem('#home_message')  
       else if(scroll() > greatherThen('#technologies') && scroll() < fixedElemStartAt('#portfolio') - 100)
         scrollToElem('#portfolio' , -> $('body,html').stop())

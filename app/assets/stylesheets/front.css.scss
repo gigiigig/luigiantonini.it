@@ -12,8 +12,13 @@ $shadows-color : #666;
 $link-color: #999;
 
 body{
+  
 }
 
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
        
 .loader {
   position: fixed;
