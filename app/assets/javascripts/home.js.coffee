@@ -51,7 +51,7 @@ window.load_home = ->
     # if($('.technology').size < elems_to_show) 
     # elems_to_show = $('.technology').size
        
-    # for index in [0..elems_to_show - 1]
+    #for index in [0..elems_to_show - 1]
     # console.debug(index)
     # $('.technology').eq(index).addClass('random')
       
@@ -122,8 +122,13 @@ window.load_home = ->
     #if(scroll() < home_message_fixed_at)
     homeImage(scroll() ,home_image_original_height , home_image)
     
-    fixableElement(scroll() , home_message , technologies , ( -> technologies.addClass('color')) , null , (-> technologies.removeClass('color')) ) 
-    fixableElement(scroll() , portfolio , works )
+    fixableElement(scroll() , home_message , technologies , 
+      ( -> 
+        technologies.addClass('color')
+        isotopeReorder('#technologies' , '*')), 
+      null , (-> technologies.removeClass('color')))
+       
+    fixableElement(scroll() , portfolio , works , -> isotopeReorder('#works' , '*'))
     
     #$('.section_title').each(->
     #  elem = $(this)
@@ -305,22 +310,28 @@ isotopize = (container , filters , start_filter) ->
     isotopeLink(container ,elem , filter) 
   container = $(container)  
   if container.width() != container.data('width')
-    container.data('width', container.width()) 
-    $(container).isotope({
-      layoutMode : 'fitRows',
-      sortBy : 'random',
-      filter: start_filter
-    })
+    container.data('width', container.width())     
+    isotopeReorder(container)
 
 isotopeLink = (container, link ,filter = '*') ->
   $(link).click( -> 
-    $(container).isotope({
-      layoutMode : 'fitRows',
-      sortBy : 'random', 
-      filter: filter
-    })
+    isotopeReorder(container, filter)    
     return false
   )
+
+isotopeReorder = (container, filter) -> 
+  sort = $(container).data('isotope-sort')
+  if(sort == undefined) then sort = true
+  $(container).data('isotope-sort', !sort)
+  
+  sort_by = if sort then 'original-order' else 'random'
+  
+  $(container).isotope({
+    layoutMode : 'fitRows',
+    sortBy : sort_by, 
+    sortAscending : sort,
+    filter: filter
+  })
 
 # scrollTo = (id) ->
   # $('html,body').animate(
