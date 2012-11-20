@@ -202,5 +202,5 @@ getPaddingTop = (elem) ->
     parseInt(padding_top.replace('px', ''))
   else 
   
-getFullHeight = (elem) ->
+window.getFullHeight = (elem) ->
   getMarginTop(elem) + getPaddingTop(elem) + elem.height()

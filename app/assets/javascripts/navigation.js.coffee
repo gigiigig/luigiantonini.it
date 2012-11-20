@@ -16,11 +16,19 @@ window.loadNavigation = ->
     go_to_home()
   )
   
+     
+  $('a.curriculum').fancybox({
+      fitToView: true
+      height: $(window).height() - 100
+      minWidth: $(window).width() / 2 
+    })
+  
   #load works behavior
   $('.work').click(->
     work_id = $(this).data('work-id')
     #window.location.hash = work_id
-    go_to_portfolio("#" + work_id)    
+    go_to_portfolio("#" + work_id)
+        
   )
   
   #load scroll naviagtion
@@ -30,24 +38,28 @@ window.loadNavigation = ->
 #manage loading of portfolio from home page
 go_to_portfolio = (start = null) -> 
 
-  #show loader
-  $('.loader').fadeIn('slow')
-
-  index_container = $('#index_container')
-  index_container.css('position' , 'relative')
+  scrollToVal(0 , (->
+    #show loader
+    $('.loader').fadeIn('slow')
   
-  fixedElemHider($('.fixed'),'hide')
-  
-  home_image = $('#home_image')
-  home_image.css('background-position-y' , '-400px')
-  
-  if Modernizr.csstransitions
-    index_container.css('margin-left' , -$(window).width())
-    setTimeout(( -> afterSlide()) ,2000)
-  else
-    index_container.animate({
-        marginLeft: -$(window).width()
-      },2000, -> afterSlide())
+    index_container = $('#index_container')
+    index_container.css('position' , 'relative')
+    
+    fixedElemHider($('.fixed'),'hide')
+    
+    home_image = $('#home_image')
+    home_image.css('background-position-y' , '-400px')
+      
+    setTimeout ->
+      if Modernizr.csstransitions
+        index_container.css('margin-left' , -$(window).width())
+        setTimeout(( -> afterSlide()) ,2000)
+      else
+        index_container.animate({
+            marginLeft: -$(window).width()
+          },2000, -> afterSlide())
+    ,500)
+  ,1000)
   
   afterSlide = -> 
     $('html,body').scrollTop(0)
@@ -67,28 +79,37 @@ go_to_home = ->
   
   index_container = $('#index_container')
   home_image = $('#home_image')
-  home_image.css('background-position-y' , '40px')
-
+  
   if Modernizr.csstransitions
     index_container.css('margin-left' , 'auto')
-    setTimeout(( -> afterSlide()) , 2000)
+    setTimeout(( -> afterSlide()) , 1000)
   else
     index_container.animate({
       marginLeft: 61
-    },2000, -> afterSlide())
+    },1000, -> afterSlide())
     
-  afterSlide = -> window.resetBody()
+  afterSlide = -> 
+    home_image.css('background-position-y' , '30px')
+    window.resetBody()
 
 #namage scrolling steps
 scrollNavigation = ->
   $(document).scroll((event) ->
 
     greatherThen =  (elem) ->
-      value = fixedElemStopAt(elem) - $(window).height() + 100
-    
-    console.debug "window height : " + $(window).height()
-    console.debug "stop at : " + (fixedElemStopAt('#technologies'))
-    console.debug "scroll at : " + greatherThen('#technologies')
+      wh = $(window).height()
+      eh = window.getFullHeight($(elem))
+      scroll_margin = 100
+      to_subtract = (if (eh > wh) then wh else eh - (wh - eh + scroll_margin)) - scroll_margin
+      
+      value = fixedElemStopAt(elem) - to_subtract
+      
+      console.debug "stop at : " + fixedElemStopAt(elem)
+      console.debug "wh : " + wh
+      console.debug "eh : " + eh
+      console.debug "value : " + value
+      
+      value
      
     if !$('body').is(':animated') && !$('html').is(':animated')
       if(scrollDir())
