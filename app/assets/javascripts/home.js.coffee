@@ -2,8 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-window.load_home = ->
+window.loadHome = ->
   
+  #set hash for home  
   window.hash('/home')
 
   #reset styles addeds from jmpress
@@ -25,88 +26,10 @@ window.load_home = ->
    
   #start top bar animation
   topBar(0)
-  
-  #load menu elements
-  #loadMenu('a.portfolio' , portfolio_fixed_at)
-  
-  #load isotope links for portfolio
-  works_isotope = -> 
-    filters = '#portfolio_all': '*' , '#portfolio_web' : '.web' , '#portfolio_mobile' : '.mobile'
-    isotopize('#works' , filters , '*')
-  
-  #load isotope links for works
-  technologies_isotope = ->
-    #add random class to worhw wich i want to show
-    num_rows = if $(window).height() > 800 then 3 else 2   
-    elems_to_show = 3 * num_rows
-    
-    num_rows = ($('.technology').size() / 3)
-    console.debug("tehnologies num rows : #{num_rows}")
-    min_height = (num_rows * $('.technology').height() + 160) + "px"
-    
-    console.debug("tehnologies min height : #{min_height}")
-    
-    $('#technologies').css('min-height' , min_height );
-    
-    # if($('.technology').size < elems_to_show) 
-    # elems_to_show = $('.technology').size
-       
-    #for index in [0..elems_to_show - 1]
-    # console.debug(index)
-    # $('.technology').eq(index).addClass('random')
-      
-    filters = '#technologies_all': '*' , '#technologies_language' : '.language' , '#technologies_framework' : '.framework' 
-    isotopize('#technologies' , filters , '*')
-      
-  #load isotope     
-  technologies_isotope()
-  works_isotope()
-  
-  $(window).resize( ->
-   technologies_isotope()
-   works_isotope()  
-  ) 
-          
+ 
   home_image = $('#home_image')
   home_image_original_height = home_image.height()
-    
-  #test to create javascript portfolio
-  $('a.portfolio').click((event) ->
-    event.preventDefault()
-    home_to_portfolio()       
-  )
-  
-  $('.work').click(->
-    work_id = $(this).data('work-id')
-    #window.location.hash = work_id
-    home_to_portfolio("#" + work_id)    
-  )
-  
-  home_to_portfolio = (start = null) -> 
 
-    index_container = $('#index_container')
-    index_container.css('position' , 'relative')
-    fixedElemHider($('.fixed'),'hide')
-    $('.loader').fadeIn('slow')
-
-    index_container.animate({
-        marginLeft: -$(window).width()
-      },2000, ->
-        $('html,body').scrollTop(0)
-        $.get('portfolio' , (data) ->
-          $('#container').html(data)
-          window.portfolio(start)
-        ) 
-    )
-  
-  #prevent mouse scroll during animation
-  $(document).on('mousewheel' , (e, aS, aQ, deltaY) ->
-    
-    if $('body').is(':animated') || $('html').is(':animated')   
-      e.preventDefault() 
-        
-  )
-  
   $(document).scroll((event) ->
     
     #if html and body are animated , prevent default scroll
@@ -125,35 +48,13 @@ window.load_home = ->
     fixableElement(scroll() , home_message , technologies , 
       ( -> 
         technologies.addClass('color')
-        isotopeReorder('#technologies' , '*')), 
+        window.isotopeReorder('#technologies' , '*')), 
       null , (-> technologies.removeClass('color')))
        
-    fixableElement(scroll() , portfolio , works , -> isotopeReorder('#works' , '*'))
-    
-    #$('.section_title').each(->
-    #  elem = $(this)
-    #  next = elem.next()
-    #  fixableElement(scroll() , elem , next , elem.offset().top , next.offset().top + next.height())
-    #)
-    
-    scrollNavigation()
-    
+    fixableElement(scroll() , portfolio , works , -> window.isotopeReorder('#works' , '*'))
+   
   )
-  
-  $('a.fancybox').fancybox()
-  #$('#show_browser_message').trigger('click')
-
-scroll = -> $(window).scrollTop()
-    
-old_scroll = 0
-scrollDir = ->
-  to_return = true
-  if(scroll() < old_scroll)
-    to_return = false
-  old_scroll = scroll()
-  to_return
-  
-
+ 
 homeImage = (scroll , original_height  ,container) ->
     
   #container.height(original_height - scroll / 1.7)
@@ -191,35 +92,6 @@ topBar = (scroll) ->
   top_bar.css("padding-top" , padding)
   brand.css("font-size" , font_size)
   brand.css("padding-top" , 8 + padding / 4)
-
-loadMenu = (elem , scroll)->
-  loadMenuElem(elem,scroll)
-    
-loadMenuElem = (elem, scroll_value) ->
-  $(elem).click((e) ->
-    e.preventDefault() 
-    scrollToVal(scroll_value))
-
-preventScroll = ->
-  $(window).scrollTop($('body').scrollTop())
-  
-scrollNavigation = ->
-
-  greatherThen =  (elem) ->
-    value = fixedElemStopAt(elem) - $(window).height() + 100
-  
-  console.debug "window height : " + $(window).height()
-  console.debug "stop at : " + (fixedElemStopAt('#technologies'))
-  console.debug "scroll at : " + greatherThen('#technologies')
-   
-  if !$('body').is(':animated') && !$('html').is(':animated')
-    if(scrollDir())
-      # control if scroll() > 0 is needed on macos safari becouse of smoth effect 
-      if(scroll() > 0 && scroll() < fixedElemStartAt('#home_message') - 100 )
-        scrollToElem('#home_message')  
-      else if(scroll() > greatherThen('#technologies') && scroll() < fixedElemStartAt('#portfolio') - 100)
-        scrollToElem('#portfolio')
-
 
 fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
 
@@ -290,13 +162,13 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , 
   current_elem.data('current_fixed' , current_fixed)   
 
 
-fixedElemStartAt =(elem) -> 
+window.fixedElemStartAt =(elem) -> 
   $(elem).offset().top 
 
-fixedElemStopAt =(elem) -> 
+window.fixedElemStopAt =(elem) -> 
   $(elem).offset().top + $(elem).height() - 100 
 
-fixedElemHider = (elem , operation) ->
+window.fixedElemHider = (elem , operation) ->
   if(elem != undefined)
     switch operation
       when "init" then elem.data('top' , elem.css('top'))
@@ -305,50 +177,12 @@ fixedElemHider = (elem , operation) ->
         new_top = (getFullHeight(elem) - getIntValue(elem.data('top')))      
         elem.stop(true).animate({'top' : -new_top} , 1000 , -> )
 
-isotopize = (container , filters , start_filter) ->
-  for elem , filter of filters
-    isotopeLink(container ,elem , filter) 
-  container = $(container)  
-  if container.width() != container.data('width')
-    container.data('width', container.width())     
-    isotopeReorder(container)
-
-isotopeLink = (container, link ,filter = '*') ->
-  $(link).click( -> 
-    isotopeReorder(container, filter)    
-    return false
-  )
-
-isotopeReorder = (container, filter) -> 
-  sort = $(container).data('isotope-sort')
-  if(sort == undefined) then sort = true
-  $(container).data('isotope-sort', !sort)
-  
-  sort_by = if sort then 'original-order' else 'random'
-  
-  $(container).isotope({
-    layoutMode : 'fitRows',
-    sortBy : sort_by, 
-    sortAscending : sort,
-    filter: filter
-  })
 
 # scrollTo = (id) ->
   # $('html,body').animate(
     # {scrollTop: $("##{id}").offset().top} , 3000, 'easeInOutExpo'
   # )
 #   
-elemPosition = (elem) ->
-  $(elem).offset().top
-  
-scrollToVal = (val , callback) ->
-  $('html,body').animate(
-    {scrollTop: val} , 2000, 'easeInOutCubic' , -> if(callback) then callback() 
-  )  
-  
-scrollToElem = (elem , callback) ->
-  console.log "scroll to : #{elem} at : " + $(elem).scrollTop()
-  scrollToVal(elemPosition(elem) + 20 , callback)
 
 getIntValue = (property) ->
   if(property != undefined)
