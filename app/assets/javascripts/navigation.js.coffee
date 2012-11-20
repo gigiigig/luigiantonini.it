@@ -8,37 +8,74 @@ window.loadNavigation = ->
   #load porfolio link on menu
   $('a.portfolio').click((event) ->
     event.preventDefault()
-    home_to_portfolio()       
+    go_to_portfolio()       
   )
-  
-  #load scroll naviagtion
-  scrollNavigation()
+    
+  $('a.home').click( (e) ->
+    e.preventDefault() 
+    go_to_home()
+  )
   
   #load works behavior
   $('.work').click(->
     work_id = $(this).data('work-id')
     #window.location.hash = work_id
-    home_to_portfolio("#" + work_id)    
+    go_to_portfolio("#" + work_id)    
   )
+  
+  #load scroll naviagtion
+  scrollNavigation()
   
   
 #manage loading of portfolio from home page
-window.home_to_portfolio = (start = null) -> 
+go_to_portfolio = (start = null) -> 
+
+  #show loader
+  $('.loader').fadeIn('slow')
 
   index_container = $('#index_container')
   index_container.css('position' , 'relative')
+  
   fixedElemHider($('.fixed'),'hide')
-  $('.loader').fadeIn('slow')
+  
+  home_image = $('#home_image')
+  home_image.css('background-position-y' , '-400px')
+  
+  if Modernizr.csstransitions
+    index_container.css('margin-left' , -$(window).width())
+    setTimeout(( -> afterSlide()) ,2000)
+  else
+    index_container.animate({
+        marginLeft: -$(window).width()
+      },2000, -> afterSlide())
+  
+  afterSlide = -> 
+    $('html,body').scrollTop(0)
+    $.get('portfolio' , (data) ->
+      $('#container').append(data)
+      $('.loader').hide()
+      window.portfolio(start)
+    ) 
 
-  index_container.animate({
-      marginLeft: -$(window).width()
-    },2000, ->
-      $('html,body').scrollTop(0)
-      $.get('portfolio' , (data) ->
-        $('#container').html(data)
-        window.portfolio(start)
-      ) 
-  )
+go_to_home = -> 
+  # $.get('/?layout=false' , (data) ->
+  #    
+  #  
+  # )
+  $('#portfolio_container').remove()
+  index_container = $('#index_container')
+  home_image = $('#home_image')
+  home_image.css('background-position-y' , '40px')
+
+  if Modernizr.csstransitions
+    index_container.css('margin-left' , 'auto')
+    setTimeout(( -> afterSlide()) , 2000)
+  else
+    index_container.animate({
+      marginLeft: 61
+    },2000, -> afterSlide())
+    
+  afterSlide = -> window.resetBody()
 
 #namage scrolling steps
 scrollNavigation = ->

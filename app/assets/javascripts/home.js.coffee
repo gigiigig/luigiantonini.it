@@ -8,7 +8,7 @@ window.loadHome = ->
   window.hash('/home')
 
   #reset styles addeds from jmpress
-  $('body,html').removeAttr('style')
+  window.resetBody()
     
   #load home message function
   home_message = $("#home_message")

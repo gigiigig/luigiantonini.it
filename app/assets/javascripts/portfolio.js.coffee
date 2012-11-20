@@ -36,16 +36,3 @@ window.portfolio = (start = null) ->
   
   $('#left_arrow').fadeIn('slow').click(-> impress_container.jmpress('prev'))
   $('#right_arrow').fadeIn('slow').click(-> impress_container.jmpress('next'))
-  
-  $('a.home').click( (e) ->
-    e.preventDefault() 
-    back_to_home()
-  )
-  
-  
-back_to_home = -> 
-  $.get('/?layout=false' , (data) ->
-    $('#container').html(data)
-    window.load_home()
-  )
-  

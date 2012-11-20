@@ -42,3 +42,7 @@ window.scrollDir = ->
 
 window.hash = (url) ->
   window.location.hash = url
+  
+#reset styles addeds from jmpress
+window.resetBody = ->
+  $('body,html').removeAttr('style')

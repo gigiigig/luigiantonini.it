@@ -11,14 +11,11 @@ $borders-color : #cdcdcd;
 $shadows-color : #666;
 $link-color: #999;
 
-body{
-  
+.navbar .brand,  
+.navbar-inner ul.nav{
+  @include transition(all 1s);
 }
-
-#browser_message , #show_browser_message {
-  display: none;
-}
-       
+         
 .loader {
   position: fixed;
   top: 50%;
@@ -27,257 +24,267 @@ body{
   display: none;
 }
 
-a.brand{
-  font-size: 36px;
-  padding-top: 13px;
-}
-.navbar-inner ul.nav{
-  padding-top: 20px;
-}
+#index_container {
+  
+  @include transition(margin-left 2s);
+  
+  #browser_message , #show_browser_message {
+    display: none;
+  }
 
-#home_image {
-  background-image: image-url('home_image.png');
-  background-position: center 40px;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  height: 372px;
-     
-  &.with_shadow{
-     @include box-shadow(#666 0 -5px 10px -8px inset);    
+  a.brand{
+    font-size: 36px;
+    padding-top: 13px;
+  }
+  .navbar-inner ul.nav{
+    padding-top: 20px;
   }
   
-  @include transition(box-shadow 2s);
-
-}
-
-.menu{
+  #home_image {
     
-    @include transition-property(all);
-    @include transition-duration(500ms); 
-    @include opacity(0);
-   
-    a , span {
-      font-weight: normal;
-      float: right;
-      padding-right: 10px;
-      font-size: 16px;
-    } 
-    a {
-      color: $link-color;
-    }
-    span{
-      color: #666;
-    }
+    @include transition(box-shadow 2s);
+    @include transition(background-position 2s);
     
-  } 
-
-#home_message {
-  
-  @include transition(box-shadow 2s);
-  //@include transition(all 1s);
-  
-  overflow: hidden;
-  margin-top: 20px;
-  position: relative;
-  height: 100px;
-  padding-top: 20px;
-  border-left: 0px;
-  border-right: 0px;
-  border-top: 1px;
-  border-bottom: 1px;
-  border-style: solid;
-  border-color: $borders-color;
-  
-  
-  .row{
-    @include transition(all 1s);
-  }
-  
-  #home_message_shadow_top {
-    position: absolute;
-    top: -20px;
-  }
-  #home_message_shadow_bottom {
-    position: absolute;
-    bottom: -20px;
-  }
-  
-  p {
-    position: relative;
-    top: 10px;
-    font-family:"Times New Roman", Times, serif;
-    
-    &.header {
-      @include transition(padding-top 1s);
-      font-size: 30px;
-      font-style: italic;
-      padding-top: 15px;
-      
-      //background-image: image-url("virgolette.png");
-    }
-    &.text{
-      font-size: 22px;
-      color: #999; 
+    background-image: image-url('home_image.png');
+    background-position: center 40px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 372px;
+       
+    &.with_shadow{
+       @include box-shadow(#666 0 -5px 10px -8px inset);    
     }
     
   }
-    
-  &.fixed {
-    
-    .row{
-      padding-top: 40px;
-    }
   
-    z-index: 1000;
-    position: fixed;
-    top: -30px;
-    background-image: image-url('background.png');
-    //@include box-shadow($shadows-color 0 4px 10px -8px);
-    
-    .menu {
-      @include opacity(1);
-      padding-top: 34px;
-    }
-    
-    p {
-      &.header {
-        //padding-top: 30px;
-      }
-      &.text {
-        display: none;
-      }
-    }
-    
-  }
-   
-}
-
-
-h2{
-  font-family: "Times New Roman", Times, serif;
-  font-style: italic;
-  font-weight: normal;
-  font-size: 26px;
-}
-
-.section_title {
-  
-  $margin-top : 100px;
-  
-  @include transition(box-shadow 2s);
-  @include transition(left 2s);
-  
-  margin-top: $margin-top;
-  
-  .bordered {
-    border-bottom: 1px solid $borders-color;
-  }
-  
-  &.fixed {
-    z-index: 1000;
-    position: fixed;
-    top: -$margin-top;
-    background-image: image-url('background.png');
-    //@include box-shadow($shadows-color 0 4px 10px -8px);
-  }
-  
-}
-
-
-#portfolio {
-  
-  padding-top: 48px;
-  .menu {
-     @include opacity(1);
-     padding-top: 10px;
-  }
-    
-}
-
-#technologies{
-  
-  margin-top: 20px;
-      
-  &:hover .technology .technology_image ,&.color .technology .technology_image  {
-    @include filter(grayscale(0%) brightness(0.0));  
-  }
-  
-  .technology {
-    
-    margin-top: 20px;
-    
-    p.description {
-      height: 110px;
-    }
-    
-    .technology_image {
+  .menu{
       
       @include transition-property(all);
       @include transition-duration(500ms); 
-      @include filter(grayscale(100%) brightness(0.1));
+      @include opacity(0);
+     
+      a , span {
+        font-weight: normal;
+        float: right;
+        padding-right: 10px;
+        font-size: 16px;
+      } 
+      a {
+        color: $link-color;
+      }
+      span{
+        color: #666;
+      }
       
-      height: 100px; 
-      background-repeat: no-repeat;
-      background-position: center;
+    } 
+  
+  #home_message {
+    
+    @include transition(box-shadow 2s);
+    //@include transition(all 1s);
+    
+    overflow: hidden;
+    margin-top: 20px;
+    position: relative;
+    height: 100px;
+    padding-top: 20px;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 1px;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: $borders-color;
+    
+    
+    .row{
+      @include transition(all 1s);
+    }
+    
+    #home_message_shadow_top {
+      position: absolute;
+      top: -20px;
+    }
+    #home_message_shadow_bottom {
+      position: absolute;
+      bottom: -20px;
+    }
+    
+    p {
+      position: relative;
+      top: 10px;
+      font-family:"Times New Roman", Times, serif;
       
+      &.header {
+        @include transition(padding-top 1s);
+        font-size: 30px;
+        font-style: italic;
+        padding-top: 15px;
+        
+        //background-image: image-url("virgolette.png");
+      }
+      &.text{
+        font-size: 22px;
+        color: #999; 
+      }
+      
+    }
+      
+    &.fixed {
+      
+      .row{
+        padding-top: 40px;
+      }
+    
+      z-index: 1000;
+      position: fixed;
+      top: -30px;
+      background-image: image-url('background.png');
+      //@include box-shadow($shadows-color 0 4px 10px -8px);
+      
+      .menu {
+        @include opacity(1);
+        padding-top: 34px;
+      }
+      
+      p {
+        &.header {
+          //padding-top: 30px;
+        }
+        &.text {
+          display: none;
+        }
+      }
+      
+    }
+     
+  }
+  
+  
+  h2{
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 26px;
+  }
+  
+  .section_title {
+    
+    $margin-top : 100px;
+    
+    @include transition(box-shadow 2s);
+    @include transition(left 2s);
+    
+    margin-top: $margin-top;
+    
+    .bordered {
+      border-bottom: 1px solid $borders-color;
+    }
+    
+    &.fixed {
+      z-index: 1000;
+      position: fixed;
+      top: -$margin-top;
+      background-image: image-url('background.png');
+      //@include box-shadow($shadows-color 0 4px 10px -8px);
     }
     
   }
   
+  
+  #portfolio {
     
-}
-
-#curriculum {
-  #header {display: none;}
-}
-
-#works {
+    padding-top: 48px;
+    .menu {
+       @include opacity(1);
+       padding-top: 10px;
+    }
+      
+  }
   
-  margin-top: 60px;
-  min-height: 900px;
-  
-  .work{
+  #technologies{
     
     margin-top: 20px;
-    cursor: pointer;
-    
-    h3{
-      padding: 5px;  
-      font-weight: normal;
+        
+    &:hover .technology .technology_image ,&.color .technology .technology_image  {
+      @include filter(grayscale(0%) brightness(0.0));  
     }
     
-    .work_image {
+    .technology {
       
-      height: 200px;
-      position: relative;
-      overflow: hidden;
+      margin-top: 20px;
       
-      div {
-        @include transition(all 500ms);
-        height: 100%;
-        width: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 100%;
+      p.description {
+        height: 110px;
+      }
+      
+      .technology_image {
         
-        &:hover{
-          @include rotate(-3deg);
-          height: 125%;
-          width: 125%;    
-          margin-left: -10%;
-          margin-top: -7%;
-        }
-           
-      }      
-
+        @include transition-property(all);
+        @include transition-duration(500ms); 
+        @include filter(grayscale(100%) brightness(0.1));
+        
+        height: 100px; 
+        background-repeat: no-repeat;
+        background-position: center;
+        
+      }
+      
+    }
+    
+      
+  }
+  
+  #curriculum {
+    #header {display: none;}
+  }
+  
+  #works {
+    
+    margin-top: 60px;
+    min-height: 900px;
+    
+    .work{
+      
+      margin-top: 20px;
+      cursor: pointer;
+      
+      h3{
+        padding: 5px;  
+        font-weight: normal;
+      }
+      
+      .work_image {
+        
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        
+        div {
+          @include transition(all 500ms);
+          height: 100%;
+          width: 100%;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 100%;
+          
+          &:hover{
+            @include rotate(-3deg);
+            height: 125%;
+            width: 125%;    
+            margin-left: -10%;
+            margin-top: -7%;
+          }
+             
+        }      
+  
+      }
+      
     }
     
   }
   
+  #contact_form {
+    margin-top: 60px;
+  }
+
 }
-
-#contact_form {
-  margin-top: 60px;
-}
-
-
