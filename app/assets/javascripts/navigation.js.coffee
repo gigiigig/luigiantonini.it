@@ -62,7 +62,9 @@ go_to_home = ->
   #    
   #  
   # )
-  $('#portfolio_container').remove()
+  portfolio_container = $('#portfolio_container')
+  portfolio_container.fadeOut(1000 , -> portfolio_container.remove())
+  
   index_container = $('#index_container')
   home_image = $('#home_image')
   home_image.css('background-position-y' , '40px')
