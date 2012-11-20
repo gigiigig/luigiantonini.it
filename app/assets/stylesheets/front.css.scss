@@ -11,6 +11,13 @@ $borders-color : #cdcdcd;
 $shadows-color : #666;
 $link-color: #999;
 
+h2{
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 26px;
+}
+
 .navbar .brand,  
 .navbar-inner ul.nav{
   @include transition(all 1s);
@@ -157,14 +164,6 @@ $link-color: #999;
       
     }
      
-  }
-  
-  
-  h2{
-    font-family: "Times New Roman", Times, serif;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 26px;
   }
   
   .section_title {

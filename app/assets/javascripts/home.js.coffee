@@ -34,10 +34,7 @@ window.loadHome = ->
     
     #if html and body are animated , prevent default scroll
     #to avoid stuttering
-        
-    console.debug "body is animated : " + $('body').is(':animated')
-    console.debug "html is animated : " + $('html').is(':animated')  
-   
+    
     #start top bar animation
     topBar(scroll())
     

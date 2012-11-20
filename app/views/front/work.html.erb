@@ -8,7 +8,9 @@
       <%= image_tag @work.cover.url(:preview) %>
     </div>
     <div class="span5 target">
-      <a class="link" href="http://<%= @work.link %>"><%= @work.link %></a>
+      <a class="link" href="http://<%= @work.link %>">
+        <%= if @work.category == 'Mobile' then 'Play Store Link' else @work.link end%>
+      </a>
       <%= BlueCloth.new(@work.description).to_html().html_safe() %>
     </div>
   </div>

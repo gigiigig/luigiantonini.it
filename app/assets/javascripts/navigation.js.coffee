@@ -11,7 +11,7 @@ window.loadNavigation = ->
     go_to_portfolio()       
   )
     
-  $('a.home').click( (e) ->
+  $('a.home , .brand').click( (e) ->
     e.preventDefault() 
     go_to_home()
   )
@@ -36,14 +36,16 @@ window.loadNavigation = ->
   
   
 #manage loading of portfolio from home page
-go_to_portfolio = (start = null) -> 
+go_to_portfolio = (start = null) ->
 
+  scroll_time = if scroll() <= 0 then 0 else 1000
+  
   scrollToVal(0 , (->
     #show loader
     $('.loader').fadeIn('slow')
   
     index_container = $('#index_container')
-    index_container.css('position' , 'relative')
+    #index_container.css('position' , 'relative')
     
     fixedElemHider($('.fixed'),'hide')
     
@@ -59,7 +61,7 @@ go_to_portfolio = (start = null) ->
             marginLeft: -$(window).width()
           },2000, -> afterSlide())
     ,500)
-  ,1000)
+  , scroll_time)
   
   afterSlide = -> 
     $('html,body').scrollTop(0)
@@ -130,13 +132,12 @@ scrollDir = -> window.scrollDir()
 elemPosition = (elem) ->
   $(elem).offset().top
   
-scrollToVal = (val , callback) ->
+scrollToVal = (val , callback , time = 2000) ->
   $('html,body').animate(
-    {scrollTop: val} , 2000, 'easeInOutCubic' , -> if(callback) then callback() 
+    {scrollTop: val} , time, 'easeInOutCubic' , -> if(callback) then callback() 
   )  
   
 scrollToElem = (elem , callback) ->
-  console.log "scroll to : #{elem} at : " + $(elem).scrollTop()
   scrollToVal(elemPosition(elem) + 20 , callback)
 
 
