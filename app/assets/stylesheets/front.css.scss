@@ -50,7 +50,7 @@ h2{
   #home_image {
     
     @include transition(box-shadow 2s);
-    @include transition(background-position 2s);
+    @include transition(background-position 1s);
     
     background-image: image-url('home_image.png');
     background-position: center 30px;

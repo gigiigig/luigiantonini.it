@@ -114,7 +114,7 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , 
   
   if scroll >= fixed_start && scroll <= fixed_stop  
     
-    if !current_fixed && !current_hidden
+    if !current_fixed && !current_hidden 
       current_elem.addClass('fixed') 
       new_margin = getFullHeight(current_elem) 
       

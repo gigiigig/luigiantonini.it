@@ -1,5 +1,6 @@
 
 window.loadIsotope = ->
+    
   #load isotope     
   technologies_isotope()
   works_isotope()

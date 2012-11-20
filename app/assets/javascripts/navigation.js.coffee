@@ -38,7 +38,7 @@ window.loadNavigation = ->
 #manage loading of portfolio from home page
 go_to_portfolio = (start = null) ->
 
-  scroll_time = if scroll() <= 0 then 0 else 1000
+  scroll_time = if scroll() <= 0 then 0 else 2000
   
   scrollToVal(0 , (->
     #show loader

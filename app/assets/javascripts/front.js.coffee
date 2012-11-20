@@ -9,7 +9,7 @@ $(document).ready( ->
   
   #prevent mouse scroll during animation
   $(document).on('mousewheel' , (e, aS, aQ, deltaY) ->    
-    if $('body').is(':animated') || $('html').is(':animated')   
+    if bodyAnimated()
       e.preventDefault() 
   )
   
@@ -46,3 +46,6 @@ window.hash = (url) ->
 #reset styles addeds from jmpress
 window.resetBody = ->
   $('body,html').removeAttr('style')
+
+window.bodyAnimated = ->
+  $('body').is(':animated') || $('html').is(':animated')   
