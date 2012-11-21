@@ -45,10 +45,10 @@ window.loadHome = ->
     fixableElement(scroll() , home_message , technologies , 
       ( -> 
         technologies.addClass('color')
-        window.isotopeReorder('#technologies' , '*')), 
+        if window.scrollDir() then window.isotopeReorder('#technologies' , '*')), 
       null , (-> technologies.removeClass('color')))
        
-    fixableElement(scroll() , portfolio , works , -> window.isotopeReorder('#works' , '*'))
+    fixableElement(scroll() , portfolio , works , ->  if window.scrollDir() then window.isotopeReorder('#works' , '*'))
    
   )
  
@@ -106,13 +106,16 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , 
   else
     fixed_start = current_elem.data('fixed_start')
     fixed_stop = current_elem.data('fixed_stop') 
-    
-  #console.log("current_elem : #{current_elem_name}" )
-  #console.log("current_hidden : #{current_hidden}" )
-  #console.log("current_fixed : #{current_fixed}" )
-  #console.log("" )
   
-  if scroll >= fixed_start && scroll <= fixed_stop  
+  if scroll >= fixed_start && scroll <= fixed_stop
+    
+    
+    console.log("scroll : #{scroll}" )
+    console.log("fixed_start : #{fixed_start}" )
+    console.log("current_elem : #{current_elem_name}" )
+    console.log("current_hidden : #{current_hidden}" )
+    console.log("current_fixed : #{current_fixed}" )
+    console.log("" )  
     
     if !current_fixed && !current_hidden 
       current_elem.addClass('fixed') 
@@ -124,6 +127,7 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , 
       bottom_elem.css('margin-top', (getMarginTop(bottom_elem) + new_margin) + 'px' )
       
       if fixed_callback != null
+        console.debug "execute fixed callback"
         fixed_callback()
         
       current_fixed = true      

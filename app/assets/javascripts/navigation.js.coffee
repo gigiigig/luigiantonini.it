@@ -50,6 +50,7 @@ go_to_portfolio = (start = null) ->
     fixedElemHider($('.fixed'),'hide')
     
     home_image = $('#home_image')
+    home_image.addClass('bg_animate')
     home_image.css('background-position-y' , '-400px')
       
     setTimeout ->
@@ -92,6 +93,7 @@ go_to_home = ->
     
   afterSlide = -> 
     home_image.css('background-position-y' , '30px')
+    setTimeout(( -> home_image.removeClass('bg_animate')) , 1000)
     window.resetBody()
 
 #namage scrolling steps
