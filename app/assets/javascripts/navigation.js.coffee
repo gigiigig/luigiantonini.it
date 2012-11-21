@@ -4,7 +4,7 @@
 #and scorll navigation
 
 window.loadNavigation = ->
-  
+    
   #load porfolio link on menu
   $('a.portfolio').click((event) ->
     event.preventDefault()
@@ -16,7 +16,6 @@ window.loadNavigation = ->
     go_to_home()
   )
   
-     
   $('a.curriculum').fancybox({
       fitToView: true
       height: $(window).height() - 100
@@ -33,6 +32,9 @@ window.loadNavigation = ->
   
   #load scroll naviagtion
   scrollNavigation()
+  
+  #load hash
+  setInterval loadHash , 300
   
   
 #manage loading of portfolio from home page
@@ -123,6 +125,15 @@ scrollNavigation = ->
         else if(scroll() > greatherThen('#technologies') && scroll() < fixedElemStartAt('#portfolio') - 100)
           scrollToElem('#portfolio')
   )
+
+old_hash = "first"
+loadHash = ->
+  current_hash = window.location.hash.replace '#/' , ''
+  if current_hash != old_hash && old_hash != 'first'
+    if current_hash == 'home'
+      go_to_home()
+     
+  old_hash = current_hash
 
 #wrappers
 fixedElemStopAt = (elem) -> window.fixedElemStopAt(elem)

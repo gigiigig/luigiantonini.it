@@ -18,6 +18,9 @@ window.portfolio = (start = null) ->
   
   options = {
               start: start
+              hash: {
+                bindChange: true
+              }
             }
             
   console.log "options : " + options       
