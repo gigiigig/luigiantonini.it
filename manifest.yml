@@ -1,0 +1,17 @@
+---
+applications:
+  .:
+    name: luigiantonini
+    framework:
+      name: rails3
+      info:
+        mem: 256M
+        description: Rails Application
+        exec: 
+    infra: eu-aws
+    url: ${name}.${target-base}
+    mem: 256M
+    instances: 1
+    services:
+      luigiantonini-mysql-64679:
+        type: mysql

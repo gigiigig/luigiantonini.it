@@ -99,6 +99,7 @@ go_to_home = ->
     home_image.css('background-position-y' , '30px')
     setTimeout(( -> home_image.removeClass('bg_animate')) , 1000)
     window.resetBody()
+    window.hash('/home')
 
 #namage scrolling steps
 scrollNavigation = ->
