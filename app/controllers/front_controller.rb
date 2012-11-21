@@ -25,6 +25,8 @@ class FrontController < ApplicationController
 
     @curriculum = response.body
     @curriculum = @curriculum.gsub(/<style.*?>[\s\S]*<\/style>/i, "")
+    
+    render :layout => 'clean'
 
   end
 

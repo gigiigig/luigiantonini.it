@@ -2,10 +2,12 @@ class Technology < ActiveRecord::Base
   
   #change inheritance type for use type as column
   self.inheritance_column = :inheritance_type
+  
+  scope :is_language, where("technologies.type = 'Language'")
+ 
   attr_accessible :description, :name , :type , :delete_image , :image
-  attr_accessor :delete_image
-  
-  
+  attr_accessor :delete_image 
+
   validates :description , :name , :presence => true
   
   has_attached_file :image , :styles => { :normal => "140x80" } , :default_url => "/assets/missing.png"

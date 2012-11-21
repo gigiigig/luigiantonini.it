@@ -17,9 +17,11 @@ window.loadNavigation = ->
   )
   
   $('a.curriculum').fancybox({
-      fitToView: true
       height: $(window).height() - 100
-      minWidth: $(window).width() / 2 
+      minWidth: $(window).width() / 2
+      fitToView : false
+      autoSize : false
+      preload   : true 
     })
   
   #load works behavior

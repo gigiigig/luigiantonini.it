@@ -1,9 +1,14 @@
 ActiveAdmin.register Technology do
 
 # f.input :author,  :as => :select,      :collection => ["Justin", "Kate", "Amelia", "Gus", "Meg"]
+  
   filter :name
   filter :description
   filter :type
+  
+  # Create sections on the index screen
+  scope :all, :default => true
+  scope :is_language
 
   form do |f|
 
@@ -39,7 +44,7 @@ ActiveAdmin.register Technology do
       row :description
       row :type
       row :image do |work|
-        if(work.image.exists?) then image_tag work.image.url end
+        if(work.image.exists?) then image_tag work.image.url(:normal) end
       end
     end
   end

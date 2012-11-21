@@ -1,6 +1,16 @@
-<h1>Curriculum</h1>
-<div class="row">
-  <div class="span12" id="curriculum">
-    <%= @curriculum.html_safe %>
-  </div>
+<div id="curriculum">
+  <%= link_to :download , asset_path('CurriculumVitaeLuigiAntonini2012.pdf') , :id => 'curriculum_download' , :target => '_blank' %>
+
+  <iframe src="https://docs.google.com/document/pub?id=1b67GGHMnwoEVXUJ2d0E8ETrz-n9PVy9zCdTcnWZdJ2Y"></iframe>
+
+  <!-- Javascripts
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <%= javascript_include_tag "jquery" %>
+
+  <script type="text/javascript">
+		$('#curriculum iframe').height($("#curriculum").height() - 50)
+  </script>
+
+</div>
 </div>

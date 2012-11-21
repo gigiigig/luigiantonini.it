@@ -31,6 +31,29 @@ h2{
   display: none;
 }
 
+
+#curriculum {
+  
+  width: 100%;
+  height: 100%;
+    
+  #curriculum_download{
+    position: absolute;
+    top: 10px;
+    right: 20px; 
+    font-size: 16px;
+    font-style: normal;
+    
+  }
+  
+  iframe {
+    width: 100%;
+    height: 90%;
+    border: 0px;
+  }
+  
+} 
+
 #index_container {
   
   @include transition(margin-left 2s);
