@@ -55,17 +55,24 @@ go_to_portfolio = (start = null) ->
     
     home_image = $('#home_image')
     home_image.addClass('bg_animate')
-    home_image.css('background-position-y' , '-400px')
-      
+    home_image.css('background-position' , 'center -400px')
+    
     setTimeout ->
       if Modernizr.csstransitions
+        #calculate current margin left as number to allow firefox
+        #animation , and for avoid flounce on chrome rettun animation
+        margin_left = ($('body').width() - index_container.width())/2  
+        index_container.data('margin-left' , margin_left)
+        index_container.css('margin-left' , margin_left)
         index_container.css('margin-left' , -$(window).width())
         setTimeout(( -> afterSlide()) ,2000)
       else
         index_container.animate({
             marginLeft: -$(window).width()
           },2000, -> afterSlide())
-    ,500)
+    ,500
+    ) 
+    
   , scroll_time)
   
   afterSlide = -> 
@@ -88,7 +95,7 @@ go_to_home = ->
   home_image = $('#home_image')
   
   if Modernizr.csstransitions
-    index_container.css('margin-left' , 'auto')
+    index_container.css('margin-left' ,  index_container.data('margin-left'))
     setTimeout(( -> afterSlide()) , 1000)
   else
     index_container.animate({
@@ -96,8 +103,9 @@ go_to_home = ->
     },1000, -> afterSlide())
     
   afterSlide = -> 
-    home_image.css('background-position-y' , '30px')
+    home_image.css('background-position' , 'center 30px')
     setTimeout(( -> home_image.removeClass('bg_animate')) , 1000)
+    index_container.css('margin-left' , 'auto')
     window.resetBody()
     window.hash('/home')
 
