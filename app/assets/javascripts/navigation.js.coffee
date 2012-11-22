@@ -64,6 +64,7 @@ go_to_portfolio = (start = null) ->
         margin_left = ($('body').width() - index_container.width())/2  
         index_container.data('margin-left' , margin_left)
         index_container.css('margin-left' , margin_left)
+        index_container.addClass 'margin_animate'
         index_container.css('margin-left' , -$(window).width())
         setTimeout(( -> afterSlide()) ,2000)
       else
@@ -104,10 +105,15 @@ go_to_home = ->
     
   afterSlide = -> 
     home_image.css('background-position' , 'center 30px')
-    setTimeout(( -> home_image.removeClass('bg_animate')) , 1000)
-    index_container.css('margin-left' , 'auto')
     window.resetBody()
     window.hash('/home')
+    setTimeout(( -> 
+      home_image.removeClass('bg_animate')) 
+      index_container.removeClass 'margin_animate'
+      index_container.css('margin-left' ,  'auto')
+    , 2000)
+    
+    
 
 #namage scrolling steps
 scrollNavigation = ->

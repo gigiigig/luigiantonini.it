@@ -60,8 +60,9 @@ h2{
 
 #index_container {
   
-  @include transition(margin-left 2s);
-  
+  &.margin_animate{
+    @include transition(margin-left 2s);
+  }
   a.brand{
     font-size: 36px;
     padding-top: 13px;
