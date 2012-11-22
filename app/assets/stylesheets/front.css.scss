@@ -54,13 +54,15 @@ h2{
   
 } 
 
+#browser_message , #show_browser_message {
+  display: none;
+}
+
 #index_container {
   
   @include transition(margin-left 2s);
   
-  #browser_message , #show_browser_message {
-    display: none;
-  }
+ 
 
   a.brand{
     font-size: 36px;

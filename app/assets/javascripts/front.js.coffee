@@ -13,10 +13,7 @@ $(document).ready( ->
       e.preventDefault() 
   )
   
-  #old browser message
-  if(!Modernizr.csstransforms3d)
-    $('#show_browser_message').trigger('click')
-
+  
 
   window.loadNavigation()
   window.loadHome()
@@ -25,6 +22,10 @@ $(document).ready( ->
   #load all links wick use fancy box
   #this load also curriculum menu item
   $('a.fancybox').fancybox()
+  
+  #old browser message
+  if(!Modernizr.csstransforms3d)
+    $('#show_browser_message').trigger('click')
   
 )
 
