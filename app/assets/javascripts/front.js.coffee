@@ -13,19 +13,21 @@ $(document).ready( ->
       e.preventDefault() 
   )
   
-  
-
-  window.loadNavigation()
-  window.loadHome()
-  window.loadIsotope()
-  
   #load all links wick use fancy box
   #this load also curriculum menu item
   $('a.fancybox').fancybox()
   
+  #explorer message
+  if($.browser.msie)
+    $('#show_explorer_message').trigger('click')
   #old browser message
-  if(!Modernizr.csstransforms3d)
+  else if(!Modernizr.csstransforms3d)
     $('#show_browser_message').trigger('click')
+
+  #load all scripts
+  window.loadNavigation()
+  window.loadHome()
+  window.loadIsotope()
   
 )
 
