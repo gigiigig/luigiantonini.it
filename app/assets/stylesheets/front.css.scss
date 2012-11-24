@@ -275,8 +275,20 @@ h2{
       cursor: pointer;
       
       h3{
-        padding: 5px;  
+        padding: 5px;
         font-weight: normal;
+        text-align: center;
+        font-family: Times New Roman;
+        font-size: 19px;
+        .date {
+          font-size: 18px;
+          color: #aaa;
+          font-style: italic;
+          font-family: Times New Roman;
+          margin: 0px;
+          padding: 0px;
+          line-height: 1em;       
+        }
       }
       
       .work_image {
