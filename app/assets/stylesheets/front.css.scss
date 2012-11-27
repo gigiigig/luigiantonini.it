@@ -284,6 +284,9 @@ h2{
         height: 200px;
         position: relative;
         overflow: hidden;
+        padding: 3px;
+        background-color: white;
+        border: 1px solid #ccc;
         
         div {
           @include transition(all 500ms);
