@@ -107,11 +107,12 @@ go_to_home = ->
     home_image.css('background-position' , 'center 30px')
     window.resetBody()
     window.hash('/home')
-    setTimeout(( -> 
-      home_image.removeClass('bg_animate')) 
+    setTimeout( -> 
+      home_image.removeClass('bg_animate') 
       index_container.removeClass 'margin_animate'
       index_container.css('margin-left' ,  'auto')
     , 2000)
+    
     
     
 
