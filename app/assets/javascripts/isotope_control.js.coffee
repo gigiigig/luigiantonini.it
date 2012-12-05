@@ -48,7 +48,7 @@ isotopize = (container , filters , start_filter) ->
     isotopeReorder(container)
 
 isotopeLink = (container, link ,filter = '*') ->
-  $(link).click( -> 
+  $(link).mouseenter( -> 
     isotopeReorder(container, filter)    
     return false
   )

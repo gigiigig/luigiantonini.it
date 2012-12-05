@@ -16,7 +16,7 @@
 //= require twitter/bootstrap
 //= require jquery.isotope.min
 //= require fancybox
-//= require impress
+//= require jmpress.all.min
 //= require front
 //= require modernizr
 //= require_tree . 
