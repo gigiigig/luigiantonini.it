@@ -68,16 +68,14 @@
             <div class="work_image"  >
               <div style="background-image: url(<%= t.cover.url(:thumb) %>);"></div>
             </div>
-            <h3>
-              <%= t.name %>
-              <p class="date"><%= t.date.year %> </p> 
-            </h3>
+            <h3> <%= t.name %>
+            <p class="date">
+              <%= t.date.year %>
+            </p></h3>
           </div>
           <% end %>
 
         </div>
-        
-       
 
         <% if Rails.env.development? %>
         <div class="row section_title" id="contact">
@@ -87,29 +85,39 @@
             </div>
           </div>
         </div>
-       
+
         <div class="row">
-          <div class="span8">
-            <form id="contact_form"> 
+          <div class="span6">
+            <form id="contact_form" action="send_mail" method="post">
               <fieldset>
                 <label><%= t :first_name%></label>
-                <input type="text" placeholder="Insert your <%= :first_name %>">
+                <input type="text" name="first_name" placeholder="Insert your <%= t :first_name %>"/>
 
                 <label><%= t :last_name%></label>
-                <input type="text" placeholder="Insert your <%= :last_name %>">
+                <input type="text" name="last_name" placeholder="Insert your <%= t :last_name %>"/>
 
                 <label><%= t :email%></label>
-                <input type="text" placeholder="Insert your <%= :email %>">
+                <input type="text" name="email" placeholder="Insert your <%= t :email %>"/>
 
-                <button type="submit" class="btn">
-                  <%= t :submit%>
-                </button>
+                <label><%= t :message%></label>
+                <textarea rows="4" name="message" placeholder="Insert your <%= t :message %>"></textarea>
+                
+                <%= button_to "Send", :action => "send_mail", :remote => true, :form => { "data-type" => "json" } , :class => 'btn' %>
+                
               </fieldset>
             </form>
-          </div>
-          <% end %>
-        </div>
 
+          </div>
+
+          <div class="span6 social">
+            <div class="row">
+              <a href="https://twitter.com/gigi_igig" target="_blank" class="offset1 span1"> <%= image_tag "twitter.png" %> </a>
+              <a href="skype:gigi_igig?call" target="_blank" class="span1"> <%= image_tag "skype.png" %> </a>
+              <a href="http://www.linkedin.com/in/luigiantonini" target="_blank" class="span1"> <%= image_tag "linkedin.png" %> </a>
+            </div>
+          </div>
+        </div>
+        <% end %>
       </div>
     </div><!--/row-->
   </div><!--/content-->

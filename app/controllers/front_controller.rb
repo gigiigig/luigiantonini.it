@@ -45,4 +45,12 @@ class FrontController < ApplicationController
     Work.all(:order => 'date DESC')
   end
 
+  def send_mail
+    first_name = params[:first_name]
+    last_name = params[:last_name]
+    email = params[:email]
+    message = params[:message]
+  end 
+  
+
 end

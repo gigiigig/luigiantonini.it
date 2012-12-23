@@ -52,6 +52,9 @@ isotopeLink = (container, link ,filter = '*') ->
     isotopeReorder(container, filter)    
     return false
   )
+  $(link).click( ->
+    return false;  
+  )
 
 window.isotopeReorder = (container, filter) -> 
   sort = $(container).data('isotope-sort')

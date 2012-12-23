@@ -324,8 +324,22 @@ h2{
     
   }
   
-  #contact_form {
+  #contact_form , .social{
     margin-top: 60px;
+    
+    textarea{
+      width: 100%;
+      
+    }
+    
+    input[type=submit]{
+      float: left;
+      clear: both;
+    } 
+    
+    
+    
+    
   }
 
 }

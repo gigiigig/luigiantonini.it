@@ -6,4 +6,8 @@ en:
   home_messages:
     head: Programming isn't my work .. is my passion ..
     text: I love modern languages and new frameworks .. and only open source ..    
-    
+  first_name: First Name
+  last_name: Last Name
+  email: Email
+  message: Message
+  send: Send
