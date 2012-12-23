@@ -28,6 +28,11 @@ $(document).ready( ->
   window.loadNavigation()
   window.loadHome()
   window.loadIsotope()
+ 
+  $('#contact_form').ajaxForm({
+    target: '#mail_send_result'
+    beforeSubmit: -> (alert('ciao'))
+  })
   
 )
 

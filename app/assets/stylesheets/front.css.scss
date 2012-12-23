@@ -326,6 +326,7 @@ h2{
   
   #contact_form , .social{
     margin-top: 60px;
+    position: relative;
     
     textarea{
       width: 100%;
@@ -337,7 +338,12 @@ h2{
       clear: both;
     } 
     
-    
+    #mail_send_result{
+      position: absolute;
+      top: -30px;
+      color: green;
+      font-size: 18px;
+    }
     
     
   }

@@ -89,21 +89,24 @@
         <div class="row">
           <div class="span6">
             <form id="contact_form" action="send_mail" method="post">
+              <div id="mail_send_result"></div>
               <fieldset>
                 <label><%= t :first_name%></label>
-                <input type="text" name="first_name" placeholder="Insert your <%= t :first_name %>"/>
+                <input required type="text" name="first_name" placeholder="Insert your <%= t :first_name %>"/>
 
                 <label><%= t :last_name%></label>
-                <input type="text" name="last_name" placeholder="Insert your <%= t :last_name %>"/>
+                <input required type="text" name="last_name" placeholder="Insert your <%= t :last_name %>"/>
 
                 <label><%= t :email%></label>
-                <input type="text" name="email" placeholder="Insert your <%= t :email %>"/>
+                <input required type="text" name="email" placeholder="Insert your <%= t :email %>"/>
 
                 <label><%= t :message%></label>
-                <textarea rows="4" name="message" placeholder="Insert your <%= t :message %>"></textarea>
-                
-                <%= button_to "Send", :action => "send_mail", :remote => true, :form => { "data-type" => "json" } , :class => 'btn' %>
-                
+                <textarea required rows="4" name="message" placeholder="Insert your <%= t :message %>"></textarea>
+
+                <button type="submit" class="btn" id="send_mail_button">
+                  <%= t :send%>
+                </button>
+             
               </fieldset>
             </form>
 
