@@ -16,7 +16,12 @@ window.loadHome = ->
      
   #load portfolio title function
   portfolio = $("#portfolio")
-  works = $("#works")    
+  works = $("#works")  
+  
+  #load contact title function
+  contact = $("#contact")
+  contact_form = $("#contact_form")    
+    
   
   #elements scroll values
   home_message_fixed_at = home_message.offset().top
@@ -49,7 +54,9 @@ window.loadHome = ->
       null , (-> technologies.removeClass('color')))
        
     fixableElement(scroll() , portfolio , works , ->  if window.scrollDir() then window.isotopeReorder('#works' , '*'))
-   
+    
+    fixableElement(scroll() , contact , contact_form)
+
   )
  
 homeImage = (scroll , original_height  ,container) ->
