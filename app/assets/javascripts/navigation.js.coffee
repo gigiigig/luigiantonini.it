@@ -4,16 +4,35 @@
 #and scorll navigation
 
 window.loadNavigation = ->
+  
+  current = 'home'
     
   #load porfolio link on menu
   $('a.portfolio').click((event) ->
     event.preventDefault()
-    go_to_portfolio()       
+    if(current == 'home')
+      go_to_portfolio()
+      current = 'portfolio'       
   )
     
   $('a.home , .brand').click( (e) ->
     e.preventDefault() 
-    go_to_home()
+    if(current='portfolio')
+      go_to_home()
+      current = 'home' 
+  )
+  
+  $('a.contact').click( (e) ->
+    e.preventDefault()
+    if(current == 'home')
+      scrollToElem('#contact')
+    else if(current == 'portfolio')
+      go_to_home()
+      setTimeout( -> 
+        scrollToElem('#contact')
+        current='home'
+      ,2000)
+      
   )
   
   $('a.curriculum').fancybox({
@@ -142,6 +161,8 @@ scrollNavigation = ->
           scrollToElem('#home_message')  
         else if(scroll() > greatherThen('#technologies') && scroll() < fixedElemStartAt('#portfolio') - 100)
           scrollToElem('#portfolio')
+        else if(scroll() > greatherThen('#works') && scroll() < fixedElemStartAt('#contact') - 100)
+          scrollToElem('#contact')
   )
 
 old_hash = "first"

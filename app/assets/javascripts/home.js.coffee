@@ -20,7 +20,7 @@ window.loadHome = ->
   
   #load contact title function
   contact = $("#contact")
-  contact_form = $("#contact_form")    
+  contact_form = $("#contact_form , .social")    
     
   
   #elements scroll values
