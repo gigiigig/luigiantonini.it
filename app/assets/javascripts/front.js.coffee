@@ -31,7 +31,18 @@ $(document).ready( ->
  
   $('#contact_form').ajaxForm({
     target: '#mail_send_result'
-    beforeSubmit: -> (alert('ciao'))
+    beforeSubmit: -> 
+      first_name = $('input[name=first_name]').val()
+      last_name = $('input[name=last_name]').val()
+      email = $('input[name=email]').val()
+      message = $('textarea[name=email]').val()
+       
+      if(first_name != "" && last_name != "" && email != "" && message != "" )
+        $('#mail_send_result img').show()
+        true
+      else
+        alert "All fieds are mandatory!"
+        false
   })
   
 )

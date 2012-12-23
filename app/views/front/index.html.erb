@@ -88,7 +88,9 @@
         <div class="row">
           <div class="span6">
             <form id="contact_form" action="send_mail" method="post">
-              <div id="mail_send_result"></div>
+              <div id="mail_send_result">
+                <%= image_tag 'loader.gif' %>
+              </div>
               <fieldset>
                 <label><%= t :first_name%></label>
                 <input required type="text" name="first_name" placeholder="Insert your <%= t :first_name %>"/>
