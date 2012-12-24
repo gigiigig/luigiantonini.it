@@ -29,8 +29,10 @@ $(document).ready( ->
   window.loadHome()
   window.loadIsotope()
  
+  #target: '#mail_send_result'
+ 
   $('#contact_form').ajaxForm({
-    target: '#mail_send_result'
+    
     beforeSubmit: -> 
       first_name = $('input[name=first_name]').val()
       last_name = $('input[name=last_name]').val()
@@ -43,6 +45,9 @@ $(document).ready( ->
       else
         alert "All fieds are mandatory!"
         false
+    success: (responseText) ->
+      $('#mail_send_result img').hide()
+      $('#mail_send_result').append(responseText + "<br>")
   })
   
 )

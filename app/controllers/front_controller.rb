@@ -52,10 +52,13 @@ class FrontController < ApplicationController
     email = params[:email]
     message = params[:message]
     
-    Mailer.contact(first_name,last_name,email,message).deliver
-    
-    render :inline =>
-      "Mail sended with success!"
+    if(Mailer.contact(first_name,last_name,email,message).deliver)    
+       render :inline =>
+         "Mail sended with success!"
+    else
+       render :inline =>
+         "<span color=\"red\">Mail sended with success!</span>"
+    end 
 
     
   end 
