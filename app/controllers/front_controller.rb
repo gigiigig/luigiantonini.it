@@ -25,7 +25,7 @@ class FrontController < ApplicationController
 
     @curriculum = response.body
     @curriculum = @curriculum.gsub(/<style.*?>[\s\S]*<\/style>/i, "")
-    
+
     render :layout => 'clean'
 
   end
@@ -46,22 +46,21 @@ class FrontController < ApplicationController
   end
 
   def send_mail
-    
+
     first_name = params[:first_name]
     last_name = params[:last_name]
     email = params[:email]
     message = params[:message]
-    
-    if(Mailer.contact(first_name,last_name,email,message).deliver)    
-       render :inline =>
-         "Mail sended with success!"
-    else
-       render :inline =>
-         "<span color=\"red\">Mail sended with success!</span>"
-    end 
 
-    
-  end 
-  
+    begin
+      Mailer.contact(first_name,last_name,email,message).deliver
+      render :inline =>
+         "Mail sended with success!"
+    rescue Exception=>e
+      render :inline =>
+         "<span style=\"color: red;\">Mail sending error, have you typed the right address? </span>"
+    end
+
+  end
 
 end
