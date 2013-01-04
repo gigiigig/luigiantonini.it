@@ -41,7 +41,9 @@
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-          <a class="brand" href="#">Luigi Antonini <em style="font-size: 16px; font-style: italic; color: #3F60B1;">Beta</em></a>
+          <a class="brand" href="#">Luigi Antonini 
+          	<!-- <em style="font-size: 16px; font-style: italic; color: #3F60B1;">Beta</em> -->
+          </a>
           <div class="container nav-collapse">
             <ul class="nav pull-right">
               <li>
@@ -59,7 +61,8 @@
                 <%= link_to t(:blog), "http://www.codeblog.it/en" , :class => 'blog'  %>
               </li>
               <li>
-                <%= link_to t(:portraits), "http://en.ritratti.luigiantonini.it/" , :class => 'portraits' , :style => "color: #CA6C6A;" %>
+                <%= link_to t(:portraits), "http://en.ritratti.luigiantonini.it/" , :class => 'portraits' #, :style => "color: #CA6C6A;" 
+                %>
               </li>
               <li>
                 <%= link_to t(:contact), "/contact" , :class => 'contact' %>

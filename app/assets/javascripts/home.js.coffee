@@ -85,9 +85,9 @@ topBar = (scroll) ->
  
   padding =  20 - (scroll / 4)
   
-  if padding < 0 then padding = 0
+  if padding < 3 then padding = 3
 
-  font_size = 20 + (padding * 0.8)
+  font_size = 18 + (padding * 0.9)
 
   #top_bar.animate({
   #  height: height
@@ -95,7 +95,7 @@ topBar = (scroll) ->
 
   top_bar.css("padding-top" , padding)
   brand.css("font-size" , font_size)
-  brand.css("padding-top" , 8 + padding / 4)
+  #brand.css("margin-bottom" , -padding / 4)
 
 fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , hidden_callback = null , static_callback = null) -> 
 
