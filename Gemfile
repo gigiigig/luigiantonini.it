@@ -67,4 +67,10 @@ platforms :ruby do
   gem 'fancybox2-rails'
 end
 
+group :test, :development do
+  gem 'rspec-rails', '~> 2.0'
+  gem 'factory_girl_rails'
+  gem 'faker'
+end
+
 gem 'bluecloth'
