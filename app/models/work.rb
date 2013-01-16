@@ -6,7 +6,7 @@ class Work < ActiveRecord::Base
   attr_accessible :date, :description, :name, :category , :link ,:cover , :delete_cover , :pictures_attributes
   attr_accessor :delete_cover
 
-  validate :date , :description , :name ,  :presence => true
+  validates :date , :description , :name , :presence => true
 
   has_attached_file :cover , :styles => { :normal => "1024x640" ,:preview => "470x294#", :thumb => "370x246#" } , :default_url => "/assets/missing.png"
   

@@ -14,4 +14,9 @@ describe Work do
     FactoryGirl.build(:work , description: nil).should_not be_valid
   end
   
+  it "should be invalid without date" do
+    FactoryGirl.build(:work , date: nil).should_not be_valid
+  end
+  
+  
 end
