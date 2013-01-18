@@ -73,4 +73,8 @@ group :test, :development do
   gem 'faker'
 end
 
+group :test do
+  gem 'shoulda-matchers'   
+end
+
 gem 'bluecloth'
