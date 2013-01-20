@@ -1,9 +1,9 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :work do |w|
-    w.name { Faker::Lorem.sentence }
-    w.description { Faker::Lorem.sentences }
-    w.date { Date.new }
+  factory :work do 
+    name { Faker::Lorem.sentence }
+    description { Faker::Lorem.sentences }
+    date { Date.new }
   end
 end

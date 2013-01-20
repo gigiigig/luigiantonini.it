@@ -8,7 +8,7 @@ class Technology < ActiveRecord::Base
   attr_accessible :description, :name , :type , :delete_image , :image
   attr_accessor :delete_image 
 
-  validates :description , :name , :presence => true
+  validates :description , :name , :type , :presence => true
   
   has_attached_file :image , :styles => { :normal => "140x80" } , :default_url => "/assets/missing.png"
   
