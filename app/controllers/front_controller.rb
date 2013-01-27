@@ -33,8 +33,13 @@ class FrontController < ApplicationController
   def portfolio
 
     if params[:id]
-      @work = Work.find params[:id]
-      render :action => 'work' , :layout => false
+      if params[:mobile] == "true"
+         @work = Work.find_by_name params[:id].gsub("-"," ")
+        render :action => 'work' 
+      else
+         @work = Work.find params[:id]
+        render :action => 'work' , :layout => false
+      end
     else
       @works = ordered_works
       render :layout => false

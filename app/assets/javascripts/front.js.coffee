@@ -29,7 +29,9 @@ $(document).ready( ->
     window.loadNavigation()
     window.loadHome()
     window.loadIsotope()
- 
+  else
+    window.loadMobile()
+  
   #target: '#mail_send_result'
  
   $('#contact_form').ajaxForm({

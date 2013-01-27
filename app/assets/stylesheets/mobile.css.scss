@@ -5,7 +5,13 @@
 @import "compass/css3/transform";
 
 @media (max-width: 767px) {
-
+  
+  .navbar .nav-collapse{ 
+    a.portfolio,a.contact{
+      display: none;
+    }
+  }
+  
   #index_container {
     #virgolette {
       display:  none;    
@@ -50,6 +56,19 @@
     a {
       display: inline;
     }
+  }
+  
+  #work {
+    
+    .target {
+      margin-top: 20px;
+    }
+    
+    h2{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    
   }
 
 }
