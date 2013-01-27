@@ -1,0 +1,55 @@
+//css for mobile devices
+@import "compass/css3";
+@import "compass/css3/appearance";
+@import "compass/css3/transition";
+@import "compass/css3/transform";
+
+@media (max-width: 767px) {
+
+  #index_container {
+    #virgolette {
+      display:  none;    
+    }  
+    
+    #home_image {
+      margin-top: -18px;
+    }
+    
+    #home_message{ 
+      padding-top: 0px;
+      padding-bottom: 20px;
+    }
+    
+    #technologies{
+      .technology{
+        
+        float: left;
+        width: 45%;
+        
+        .description {
+          display: none;
+        }
+        
+        .technology_image{
+           @include filter(grayscale(0%) brightness(0.1));
+        }
+        
+      }  
+      
+    }
+  }
+  
+  #portfolio {
+    .menu {
+      display: none;
+    }
+  }
+  
+  .social{
+    height: 300px; 
+    a {
+      display: inline;
+    }
+  }
+
+}

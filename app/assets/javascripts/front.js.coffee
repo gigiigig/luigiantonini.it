@@ -25,9 +25,10 @@ $(document).ready( ->
     $('#show_browser_message').trigger('click')
 
   #load all scripts
-  window.loadNavigation()
-  window.loadHome()
-  window.loadIsotope()
+  if $(window).width() >= 768  
+    window.loadNavigation()
+    window.loadHome()
+    window.loadIsotope()
  
   #target: '#mail_send_result'
  
