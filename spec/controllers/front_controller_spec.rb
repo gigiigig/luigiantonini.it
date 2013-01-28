@@ -69,18 +69,42 @@ describe FrontController do
     end
     context "with param :id" do
 
-      before :each do
-        @work = FactoryGirl.create(:work)
-        get :portfolio , id: @work.id                
-      end
+      context "wothout param :mobile" do
 
-      describe "assign" do
-        it { should assign_to :work }
-      end
+        before :each do
+          work = FactoryGirl.create(:work)
+          get :portfolio , id: work.id
+        end
 
-      describe "render" do
-        it { should render_template :work }
-        it { should_not render_with_layout }
+        describe "assign" do
+          it { should assign_to :work }
+        end
+
+        describe "render" do
+          it { should render_template :work }
+          it { should_not render_with_layout }
+        end
+
+      end
+      context "with param :mobile" do
+
+        before :each do
+          @test_work = FactoryGirl.create(:work)
+          get :portfolio , id: @test_work.name.to_s.gsub(" " , "-") , mobile: "true"
+        end
+
+        describe "assign" do
+          it { should assign_to :work }
+          it "find work by name" do
+            assigns(:work).should == @test_work
+          end
+        end
+
+        describe "render" do
+          it { should render_template :work }
+          it { should render_with_layout :application }
+        end
+
       end
 
     end
