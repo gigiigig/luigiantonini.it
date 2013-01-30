@@ -61,7 +61,7 @@ window.scroll = -> $(window).scrollTop()
 old_scroll = 0
 window.scrollDir = ->
   to_return = true
-  if(scroll() < old_scroll)
+  if(scroll() <= old_scroll)
     to_return = false
   old_scroll = scroll()
   to_return
