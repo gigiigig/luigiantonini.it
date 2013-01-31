@@ -232,7 +232,7 @@ h2{
     margin-top: 20px;
         
     &:hover .technology .technology_image ,&.color .technology .technology_image  {
-      @include filter(grayscale(0%) brightness(0.0));  
+      @include filter(grayscale(0%) brightness(0.0)); 
     }
     
     .technology {
@@ -252,6 +252,7 @@ h2{
         height: 100px; 
         background-repeat: no-repeat;
         background-position: center;
+        background-size: contain; 
         
       }
       
