@@ -4,7 +4,7 @@
 @import "compass/css3/transition";
 @import "compass/css3/transform";
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   
   .navbar .nav-collapse{ 
     a.portfolio,a.contact{
@@ -37,7 +37,8 @@
         }
         
         .technology_image{
-           @include filter(grayscale(0%) brightness(0.1));
+           margin: 5px;
+           @include filter(grayscale(0%));
         }
         
       }  

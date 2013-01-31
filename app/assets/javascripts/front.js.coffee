@@ -25,7 +25,7 @@ $(document).ready( ->
     $('#show_browser_message').trigger('click')
 
   #load all scripts
-  if $(window).width() >= 768  
+  if $(window).width() > 768  
     window.loadNavigation()
     window.loadHome()
     window.loadIsotope()
