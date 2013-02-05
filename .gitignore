@@ -21,4 +21,7 @@
 #vendor
 /vendor/cache
 
+#database configuration
+config/database.yml
+
 .DS_Store
