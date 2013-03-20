@@ -64,7 +64,7 @@ homeImage = (scroll , original_height  ,container) ->
   #container.height(original_height - scroll / 1.7)
   #container.css('margin-top' , -20 + scroll / 1.1)
   
-  container.css('background-position' , 'center ' + ( 40 - scroll / 10) + 'px')
+  container.css('background-position' , 'center ' + (0 - scroll / 10) + 'px')
   
   if scroll == 0
     container.removeClass('with_shadow')
