@@ -1,9 +1,7 @@
 ActiveAdmin.register Work  do
 # Fenu :label => "All" , :parent => "Works"
 
-  filter :name
-  filter :description
-  filter :date
+  config.clear_sidebar_sections!
 
   form :html => { :multipart => true } do |f|
 
@@ -31,13 +29,13 @@ ActiveAdmin.register Work  do
   index :download_links => false do
 
     column :name
-    column :description
-    column :link
-    column :date
 
     column "Cover" do |work|
       if(work.cover.exists?) then image_tag work.cover.url(:thumb) end
     end
+
+    column :link
+    column :date
 
     column "Images" do |work|
       work.pictures.size
