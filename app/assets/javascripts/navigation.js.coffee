@@ -74,12 +74,12 @@ go_to_portfolio = (start = null) ->
     
     home_image = $('#home_image')
     home_image.addClass('bg_animate')
-    home_image.css('background-position' , 'center -400px')
+    home_image.css('background-position' , 'center -460px')
     
     setTimeout ->
       if Modernizr.csstransitions
         #calculate current margin left as number to allow firefox
-        #animation , and for avoid flounce on chrome rettun animation
+        #animation , and for avoid flounce on chrome return animation
         margin_left = ($('body').width() - index_container.width())/2  
         index_container.data('margin-left' , margin_left)
         index_container.css('margin-left' , margin_left)
@@ -130,7 +130,7 @@ go_to_home = ->
       home_image.removeClass('bg_animate') 
       index_container.removeClass 'margin_animate'
       index_container.css('margin-left' ,  'auto')
-    , 2000)
+    , 1000)
     
     
     

@@ -49,8 +49,7 @@ $borders-color : #cdcdcd;
   h2{
     border-bottom: 1px solid $borders-color;
     margin-bottom: 30px;
-    
-    
+    @include text-shadow(#fff 1px 1px 2px);    
   }
   
   

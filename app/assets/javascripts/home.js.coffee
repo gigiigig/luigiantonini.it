@@ -159,6 +159,7 @@ fixableElement = (scroll , current_elem , bottom_elem , fixed_callback = null , 
     if current_fixed || current_hidden
       current_elem.removeClass("fixed")
       current_elem.removeAttr('style')
+      current_elem.stop(true)
       bottom_elem.css('margin-top', getMarginTop(bottom_elem) - getFullHeight(current_elem))
       
       if static_callback != null
