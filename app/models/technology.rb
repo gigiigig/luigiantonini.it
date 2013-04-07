@@ -4,8 +4,10 @@ class Technology < ActiveRecord::Base
   self.inheritance_column = :inheritance_type
   
   scope :is_language, where("technologies.type = 'Language'")
+  scope :is_active, where(:active => true)
+   
  
-  attr_accessible :description, :name , :type , :delete_image , :image
+  attr_accessible :description, :name , :type , :delete_image , :image , :active
   attr_accessor :delete_image 
 
   validates :description , :name , :type , :presence => true

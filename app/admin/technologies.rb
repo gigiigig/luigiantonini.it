@@ -9,6 +9,7 @@ ActiveAdmin.register Technology do
   # Create sections on the index screen
   scope :all, :default => true
   scope :is_language
+  scope :is_active
 
   form do |f|
 
@@ -16,6 +17,7 @@ ActiveAdmin.register Technology do
       f.input :name
       f.input :description
       f.input :type , :as => :select , :collection => ["Language" , "Framework" , "Platform"]
+      f.input :active 
       f.input :image , :as => :file , :hint => (f.template.image_tag(f.object.image.url) if f.object.image.exists?)
       f.input :delete_image, :as=>:boolean, :required => false
     end

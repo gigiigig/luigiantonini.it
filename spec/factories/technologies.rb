@@ -5,5 +5,6 @@ FactoryGirl.define do
     name { Faker::Lorem.sentence }
     description { Faker::Lorem.sentences }
     type { "Language" }
+    active { true }
   end
 end
