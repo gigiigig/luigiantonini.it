@@ -5,6 +5,10 @@
 @import "compass/css3/transform";
 
 @media (max-width: 979px) {
+
+  #github {
+    display: none;
+  }
   
   .navbar .nav-collapse{ 
     a.portfolio,a.contact{
