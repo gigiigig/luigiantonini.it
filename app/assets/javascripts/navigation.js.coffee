@@ -52,7 +52,7 @@ window.loadNavigation = ->
   )
   
   #load scroll naviagtion
-  scrollNavigation()
+  #scrollNavigation()
   
   #load hash
   setInterval loadHash , 300
